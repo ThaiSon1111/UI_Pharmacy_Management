@@ -23,13 +23,19 @@ namespace WindowsFormsApp_Pharmacy_Management
         Update = 2,   // Khi nhấn nút Sửa (02)
         Delete = 3    // Khi nhấn nút Xóa (03)
     }
+    
     public partial class UserInfoForm : Form
     {
         // 2. Khai báo biến lưu trữ trạng thái hiện tại (Form State)
         private FormMode currentMode = FormMode.None;
         // Mã báo cáo/màn hình được sử dụng để lấy cấu hình
         private const string REPORT_CODE = "0100";
-        private const string PROC_TP = "";
+        // Cần thêm hàm ánh xạ (Helper)
+        private string GetProcTypeFromMode(FormMode mode)
+        {
+            // Ánh xạ FormMode sang PROC_TP string (01, 02, 03)
+            return ((int)mode).ToString("D2"); // D2 format 1 -> "01", 2 -> "02"
+        }
         // Khai báo Static Schema (ĐỒNG BỘ VỚI USER_COLUMNS_SCHEMA TRONG PYTHON)
         private static readonly List<ColumnConfig> GridSchema = new List<ColumnConfig>
         {
@@ -188,6 +194,76 @@ namespace WindowsFormsApp_Pharmacy_Management
             dgvUsers.AllowUserToAddRows = false;
             dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
+        // Hàm để tạo request API đến service
+        private async Task CallPythonServiceIUD(FormMode mode, string userName, string email, string id_no, string id_dt, string id_org, string userid, string pwd, string mobi_phone)
+        {
+            string procTp = GetProcTypeFromMode(mode);
+
+            // 1. Tạo đối tượng dữ liệu chung (bao gồm cả PROC_TP)
+            var userData = new
+            {
+                // PROC_TP được đặt lên đầu để Python phân luồng
+                PROC_TP = procTp,
+
+                // Gửi tên cột CHỮ HOA để khớp với Python và Oracle DB
+                USERNAME = userName,
+                EMAIL = email,
+                ID_NO = id_no,
+                ID_DT = id_dt,
+                ID_ORG = id_org,
+                USER_ID = userid, // Khóa chính
+                PWD = pwd,
+                MOBI_PHONE = mobi_phone
+            };
+
+            string jsonPayload = JsonConvert.SerializeObject(userData);
+
+            using (StringContent content = new StringContent(jsonPayload, Encoding.UTF8, "application/json"))
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    // Endpoint API IUD chung
+                    string url = "http://localhost:5000/api/users/iud";
+
+                    // Luôn dùng POST (vì là IUD)
+                    HttpResponseMessage response = await client.PostAsync(url, content);
+                    string responseContent = await response.Content.ReadAsStringAsync();
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        dynamic jsonResponse = JsonConvert.DeserializeObject(responseContent);
+                        string successMessage = jsonResponse?.message ?? "Thao tác IUD thành công.";
+
+                        MessageBox.Show(successMessage, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        await ReloadDataAsync();
+                        currentMode = FormMode.None;
+                        DisableDetailInfo();
+                        ClearDetailInfo(); // Cần đảm bảo hàm này tồn tại
+                    }
+                    else
+                    {
+                        string errorTitle = $"Lỗi HTTP: {response.StatusCode} (PROC_TP: {procTp})";
+                        // Xử lý lỗi (giống như logic đã có)
+                        try
+                        {
+                            dynamic errorResponse = JsonConvert.DeserializeObject(responseContent);
+                            string errorMessage = errorResponse?.error ?? responseContent;
+                            MessageBox.Show(errorMessage, errorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        catch
+                        {
+                            MessageBox.Show($"Chi tiết lỗi: {responseContent}", errorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Lỗi kết nối hoặc xử lý: {ex.Message}", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
         private async void btnSearch_Click(object sender, EventArgs e)
         {
             //Disnable các trường detail info
@@ -246,99 +322,30 @@ namespace WindowsFormsApp_Pharmacy_Management
             txtUserIdDetail.Focus();
             currentMode = FormMode.Insert;
         }
-        // Hàm gọi dịch vụ Python, đã chuyển thành POST request
+        
 
-       
-        private async Task CallPythonServiceInsert(string userName, string email, string id_no, string id_dt, string id_org, string userid, string pwd, string mobi_phone)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
-            /*if (string.IsNullOrEmpty(userName))
+            string userid = txtUserIdDetail.Text.Trim();
+
+            if (string.IsNullOrEmpty(userid))
             {
-                MessageBox.Show("Tên người dùng (Username) không được để trống.", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn một người dùng trên lưới để xóa.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            */
-            // 1. Tạo đối tượng dữ liệu để serialize thành JSON
-            var userData = new
+
+            DialogResult result = MessageBox.Show(
+                $"Bạn có chắc chắn muốn xóa người dùng với tài khoản '{userid}' không?",
+                "Xác nhận Xóa",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
             {
-                username = userName,
-                email = email,
-                id_no = id_no,
-                id_dt = id_dt, // Đã được định dạng YYYYMMDD
-                id_org = id_org,
-                userid = userid,
-                pwd = pwd,
-                mobi_phone = mobi_phone
-            };
-
-            // 2. Chuyển đối tượng sang chuỗi JSON
-            string jsonPayload = JsonConvert.SerializeObject(userData);
-
-            // 3. Đóng gói JSON vào StringContent và thiết lập Content-Type
-            using (StringContent content = new StringContent(jsonPayload, Encoding.UTF8, "application/json"))
-            using (HttpClient client = new HttpClient())
-            {
-                try
-                {
-                    // Endpoint POST và port 5001 của Flask
-                    string url = "http://localhost:5000/api/users/add";
-
-                    // 4. Thực hiện POST request
-                    HttpResponseMessage response = await client.PostAsync(url, content);
-
-                    // Đọc phản hồi từ server
-                    string responseContent = await response.Content.ReadAsStringAsync();
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        // PHÂN TÍCH JSON CHÍNH XÁC
-                        dynamic jsonResponse = JsonConvert.DeserializeObject(responseContent);
-
-                        // Lấy ra message. Newtonsoft.Json sẽ tự động giải mã \u... thành tiếng Việt
-                        string successMessage = jsonResponse?.message ?? "Thao tác thành công.";
-
-                        // Hiển thị message tiếng Việt đã được xử lý
-                        MessageBox.Show(successMessage, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        // --- TỰ ĐỘNG ĐÓNG FORM SAU KHI THÀNH CÔNG ---
-                        // 1. Bỏ lệnh this.Close();
-                        // 2. Gọi lại hàm tra cứu để làm mới lưới (dgvUsers)
-                        await ReloadDataAsync(); // <== GỌI HÀM TẢI LẠI DỮ LIỆU
-
-                        // 3. Đưa form về trạng thái xem ban đầu (None) và khóa các control chi tiết
-                        currentMode = FormMode.None;
-                        DisableDetailInfo();
-
-                        // Không cần this.Close(); nữa!
-                    }
-                    else
-                    {
-                        // Xử lý lỗi: Hiển thị lỗi HTTP và nội dung phản hồi
-                        string errorTitle = $"Lỗi HTTP: {response.StatusCode}";
-
-                        // Cố gắng phân tích JSON lỗi để hiển thị message tiếng Việt
-                        try
-                        {
-                            dynamic errorResponse = JsonConvert.DeserializeObject(responseContent);
-                            string errorMessage = errorResponse?.error ?? responseContent; // Lấy trường 'error' hoặc chuỗi thô
-                            MessageBox.Show(errorMessage, errorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        catch
-                        {
-                            // Nếu không phải JSON, hiển thị lỗi HTTP và nội dung thô
-                            MessageBox.Show($"Chi tiết lỗi: {responseContent}", errorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // Lỗi kết nối mạng, server không chạy, v.v.
-                    MessageBox.Show($"Lỗi kết nối hoặc xử lý: {ex.Message}", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                // GỌI HÀM IUD CHUNG VỚI FormMode.Delete
+                MessageBox.Show("Bắt đầu xử lý xóa tài khoản");
+                await CallPythonServiceIUD(FormMode.Delete, null, null, null, null, null, userid, null, null);
             }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            string PROC_TP = "02";
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -346,107 +353,19 @@ namespace WindowsFormsApp_Pharmacy_Management
             EnableDetailInfo();
             currentMode = FormMode.Update;
         }
-        private async Task CallPythonServiceEdit(string userName, string email, string id_no, string id_dt, string id_org, string userid, string pwd, string mobi_phone)
-        {
-            /*if (string.IsNullOrEmpty(userName))
-            {
-                MessageBox.Show("Tên người dùng (Username) không được để trống.", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            */
-            // 1. Tạo đối tượng dữ liệu để serialize thành JSON
-            var userData = new
-            {
-                username = userName,
-                email = email,
-                id_no = id_no,
-                id_dt = id_dt, // Đã được định dạng YYYYMMDD
-                id_org = id_org,
-                userid = userid,
-                pwd = pwd,
-                mobi_phone = mobi_phone
-            };
-
-            // 2. Chuyển đối tượng sang chuỗi JSON
-            string jsonPayload = JsonConvert.SerializeObject(userData);
-
-            // 3. Đóng gói JSON vào StringContent và thiết lập Content-Type
-            using (StringContent content = new StringContent(jsonPayload, Encoding.UTF8, "application/json"))
-            using (HttpClient client = new HttpClient())
-            {
-                try
-                {
-                    // Endpoint POST và port 5001 của Flask
-                    string url = "http://localhost:5000/api/users/update";
-
-                    // 4. Thực hiện POST request
-                    HttpResponseMessage response = await client.PostAsync(url, content);
-
-                    // Đọc phản hồi từ server
-                    string responseContent = await response.Content.ReadAsStringAsync();
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        // PHÂN TÍCH JSON CHÍNH XÁC
-                        dynamic jsonResponse = JsonConvert.DeserializeObject(responseContent);
-
-                        // Lấy ra message. Newtonsoft.Json sẽ tự động giải mã \u... thành tiếng Việt
-                        string successMessage = jsonResponse?.message ?? "Thao tác thành công.";
-
-                        // Hiển thị message tiếng Việt đã được xử lý
-                        MessageBox.Show(successMessage, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        // --- TỰ ĐỘNG ĐÓNG FORM SAU KHI THÀNH CÔNG ---
-                        // 1. Bỏ lệnh this.Close();
-                        // 2. Gọi lại hàm tra cứu để làm mới lưới (dgvUsers)
-                        await ReloadDataAsync(); // <== GỌI HÀM TẢI LẠI DỮ LIỆU
-
-                        // 3. Đưa form về trạng thái xem ban đầu (None) và khóa các control chi tiết
-                        currentMode = FormMode.None;
-                        DisableDetailInfo();
-
-                        // Không cần this.Close(); nữa!
-                    }
-                    else
-                    {
-                        // Xử lý lỗi: Hiển thị lỗi HTTP và nội dung phản hồi
-                        string errorTitle = $"Lỗi HTTP: {response.StatusCode}";
-
-                        // Cố gắng phân tích JSON lỗi để hiển thị message tiếng Việt
-                        try
-                        {
-                            dynamic errorResponse = JsonConvert.DeserializeObject(responseContent);
-                            string errorMessage = errorResponse?.error ?? responseContent; // Lấy trường 'error' hoặc chuỗi thô
-                            MessageBox.Show(errorMessage, errorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        catch
-                        {
-                            // Nếu không phải JSON, hiển thị lỗi HTTP và nội dung thô
-                            MessageBox.Show($"Chi tiết lỗi: {responseContent}", errorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // Lỗi kết nối mạng, server không chạy, v.v.
-                    MessageBox.Show($"Lỗi kết nối hoặc xử lý: {ex.Message}", "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show(PROC_TP.ToString(), "Thông tin loại xử lý");
-            // Xử lý chính
-            // Lấy dữ liệu từ các control
-            string userName = txtUsernameDetail.Text;
-            string email = txtEmailDetail.Text;
-            string id_no = txtIdNoDetail.Text;
-            // Lấy chuỗi ngày cấp thô từ control
-            string id_dt_raw = txtIdDtDetail.Text;
-            string id_org = txtIdOrgDetail.Text;
-            string userid = txtUserIdDetail.Text;
-            string pwd = txtIdPwdDetail.Text;
-            string mobi_phone = txtPhoneDetail.Text;
+            // ... (Logic lấy và định dạng dữ liệu, xử lý id_dt_formatted giữ nguyên) ...
+            string userid = txtUserIdDetail.Text.Trim();
+            string userName = txtUsernameDetail.Text.Trim(); // Lấy từ TextBox
+            string email = txtEmailDetail.Text.Trim();       // Lấy từ TextBox
+            string mobi_phone = txtPhoneDetail.Text.Trim();  // Lấy từ TextBox
+            string id_no = txtIdNoDetail.Text.Trim();        // Lấy từ TextBox
+            string id_org = txtIdOrgDetail.Text.Trim();      // Lấy từ TextBox
+            string id_dt_raw = txtIdDtDetail.Text.Trim();    // Ngày cấp thô
+            string pwd = txtIdPwdDetail.Text;                // Mật khẩu
+
             // --- XỬ LÝ CHUYỂN ĐỔI NGÀY THÁNG SANG YYYYMMDD (Oracle) ---
             string id_dt_formatted;
             // KHẮC PHỤC LỖI CS0165: Gán giá trị mặc định cho dateValue
@@ -493,19 +412,18 @@ namespace WindowsFormsApp_Pharmacy_Management
             }
             // --- KẾT THÚC XỬ LÝ CHUYỂN ĐỔI NGÀY THÁNG ---
 
-            // Gọi hàm service với dữ liệu đã lấy
-            //AddNew
+            // Xử lý chính
+            if (currentMode == FormMode.Insert || currentMode == FormMode.Update)
+            {
+                string action = (currentMode == FormMode.Insert) ? "thêm mới" : "chỉnh sửa";
+                MessageBox.Show($"Bắt đầu xử lý {action} tài khoản");
 
-            if (currentMode == FormMode.Insert)
-            {
-                MessageBox.Show("Bắt đầu xử lý thêm mới tài khoản");
-                await CallPythonServiceInsert(userName, email, id_no, id_dt_formatted, id_org, userid, pwd, mobi_phone);
+                // GỌI HÀM IUD CHUNG
+                await CallPythonServiceIUD(currentMode, userName, email, id_no, id_dt_formatted, id_org, userid, pwd, mobi_phone);
             }
-            //Edit
-            if (currentMode == FormMode.Update)
+            else
             {
-                MessageBox.Show("Bắt đầu xử lý chính sửa tài khoản");
-                await CallPythonServiceEdit(userName, email, id_no, id_dt_formatted, id_org, userid, pwd, mobi_phone);
+                MessageBox.Show("Vui lòng nhấn 'Thêm mới' hoặc 'Sửa' trước khi Lưu.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
         }
