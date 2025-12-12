@@ -65,7 +65,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             }
 
             // 5. Cấu hình API Request
-            const string apiUrl = "http://127.0.0.1:5001/api/change_password"; // Địa chỉ API Flask của bạn
+            const string apiUrl = "http://127.0.0.1:5000/api/change_password"; // Địa chỉ API Flask của bạn
 
             // Chuẩn bị dữ liệu JSON payload
             var passwordData = new

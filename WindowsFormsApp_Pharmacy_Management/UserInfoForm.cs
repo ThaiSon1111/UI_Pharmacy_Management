@@ -445,6 +445,7 @@ namespace WindowsFormsApp_Pharmacy_Management
 
                 // Khóa chính và các trường khác
                 txtUserIdDetail.Text = GetCellValue(selectedRow, "USER_ID");
+                txtIdPwdDetail.Text = GetCellValue(selectedRow, "PWD");
                 txtUsernameDetail.Text = GetCellValue(selectedRow, "USERNAME");
                 txtPhoneDetail.Text = GetCellValue(selectedRow, "MOBI_PHONE");
                 txtEmailDetail.Text = GetCellValue(selectedRow, "EMAIL");
@@ -456,7 +457,7 @@ namespace WindowsFormsApp_Pharmacy_Management
                 // Cột PWD (Mật khẩu - nếu có)
                 // Lưu ý: Không nên hiển thị mật khẩu đã hash ra TextBox. Có thể để trống hoặc hiển thị placeholder.
                 // Ví dụ:
-                txtIdPwdDetail.Text = string.Empty; // Luôn để trống khi xem
+                //txtIdPwdDetail.Text = string.Empty; // Luôn để trống khi xem
                                                     // HOẶC: txtIdPwdDetail.Text = "******";
 
                 // Xử lý Ngày cấp (ID_DT)
@@ -479,6 +480,11 @@ namespace WindowsFormsApp_Pharmacy_Management
             {
                 MessageBox.Show($"Lỗi hiển thị dữ liệu: {ex.Message}\nVui lòng kiểm tra lại tên cột (DataField) và tên TextBox.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void txtIdDtDetail_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

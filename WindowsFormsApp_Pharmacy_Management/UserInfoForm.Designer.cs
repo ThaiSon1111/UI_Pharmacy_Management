@@ -47,7 +47,6 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.label11 = new System.Windows.Forms.Label();
             this.txtIdOrgDetail = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.txtIdDtDetail = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtIdNoDetail = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -60,6 +59,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtUserIdDetail = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvUsers = new System.Windows.Forms.DataGridView();
+            this.txtIdDtDetail = new System.Windows.Forms.DateTimePicker();
             this.gbSearch.SuspendLayout();
             this.gbDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
@@ -155,6 +155,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             this.gbDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbDetails.Controls.Add(this.txtIdDtDetail);
             this.gbDetails.Controls.Add(this.btnSave);
             this.gbDetails.Controls.Add(this.btnEdit);
             this.gbDetails.Controls.Add(this.btnDelete);
@@ -163,7 +164,6 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.gbDetails.Controls.Add(this.label11);
             this.gbDetails.Controls.Add(this.txtIdOrgDetail);
             this.gbDetails.Controls.Add(this.label10);
-            this.gbDetails.Controls.Add(this.txtIdDtDetail);
             this.gbDetails.Controls.Add(this.label9);
             this.gbDetails.Controls.Add(this.txtIdNoDetail);
             this.gbDetails.Controls.Add(this.label8);
@@ -253,13 +253,6 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.label10.Size = new System.Drawing.Size(62, 20);
             this.label10.TabIndex = 12;
             this.label10.Text = "Nơi cấp";
-            // 
-            // txtIdDtDetail
-            // 
-            this.txtIdDtDetail.Location = new System.Drawing.Point(625, 68);
-            this.txtIdDtDetail.Name = "txtIdDtDetail";
-            this.txtIdDtDetail.Size = new System.Drawing.Size(152, 26);
-            this.txtIdDtDetail.TabIndex = 11;
             // 
             // label9
             // 
@@ -367,6 +360,17 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.dgvUsers.TabIndex = 3;
             this.dgvUsers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellClick);
             // 
+            // txtIdDtDetail
+            // 
+            this.txtIdDtDetail.CustomFormat = "dd/MM/yyyy";
+            this.txtIdDtDetail.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.txtIdDtDetail.Location = new System.Drawing.Point(625, 69);
+            this.txtIdDtDetail.Name = "txtIdDtDetail";
+            this.txtIdDtDetail.ShowUpDown = true;
+            this.txtIdDtDetail.Size = new System.Drawing.Size(152, 26);
+            this.txtIdDtDetail.TabIndex = 23;
+            this.txtIdDtDetail.ValueChanged += new System.EventHandler(this.txtIdDtDetail_ValueChanged);
+            // 
             // UserInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -399,7 +403,6 @@ namespace WindowsFormsApp_Pharmacy_Management
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtSearchUserId;
         private System.Windows.Forms.GroupBox gbDetails;
-        private System.Windows.Forms.TextBox txtIdDtDetail;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtIdNoDetail;
         private System.Windows.Forms.Label label8;
@@ -420,5 +423,6 @@ namespace WindowsFormsApp_Pharmacy_Management
         private System.Windows.Forms.DataGridView dgvUsers;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.DateTimePicker txtIdDtDetail;
     }
 }

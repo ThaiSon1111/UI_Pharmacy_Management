@@ -16,7 +16,7 @@ namespace WindowsFormsApp_Pharmacy_Management
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new UserInfoForm());
+            Application.Run(new LoginForm());
         }
     }
 }
