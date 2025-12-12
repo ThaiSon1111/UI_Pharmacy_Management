@@ -39,9 +39,9 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.label1 = new System.Windows.Forms.Label();
             this.txtSearchUserId = new System.Windows.Forms.TextBox();
             this.gbDetails = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.txtIdPwdDetail = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -155,9 +155,9 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             this.gbDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbDetails.Controls.Add(this.button4);
-            this.gbDetails.Controls.Add(this.button3);
-            this.gbDetails.Controls.Add(this.button2);
+            this.gbDetails.Controls.Add(this.btnSave);
+            this.gbDetails.Controls.Add(this.btnEdit);
+            this.gbDetails.Controls.Add(this.btnDelete);
             this.gbDetails.Controls.Add(this.btnAddNew);
             this.gbDetails.Controls.Add(this.txtIdPwdDetail);
             this.gbDetails.Controls.Add(this.label11);
@@ -182,32 +182,35 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.gbDetails.TabStop = false;
             this.gbDetails.Text = "Thông tin chi tiết";
             // 
-            // button4
+            // btnSave
             // 
-            this.button4.Location = new System.Drawing.Point(401, 121);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 31);
-            this.button4.TabIndex = 19;
-            this.button4.Text = "Lưu";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnSave.Location = new System.Drawing.Point(397, 121);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(105, 30);
+            this.btnSave.TabIndex = 21;
+            this.btnSave.Text = "Lưu";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // button3
+            // btnEdit
             // 
-            this.button3.Location = new System.Drawing.Point(281, 121);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 31);
-            this.button3.TabIndex = 18;
-            this.button3.Text = "Xóa";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnEdit.Location = new System.Drawing.Point(155, 121);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(100, 31);
+            this.btnEdit.TabIndex = 20;
+            this.btnEdit.Text = "Sửa";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // button2
+            // btnDelete
             // 
-            this.button2.Location = new System.Drawing.Point(157, 121);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 31);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "Sửa";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnDelete.Location = new System.Drawing.Point(281, 121);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(100, 31);
+            this.btnDelete.TabIndex = 18;
+            this.btnDelete.Text = "Xóa";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAddNew
             // 
@@ -362,6 +365,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.dgvUsers.RowTemplate.Height = 28;
             this.dgvUsers.Size = new System.Drawing.Size(1782, 491);
             this.dgvUsers.TabIndex = 3;
+            this.dgvUsers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellClick);
             // 
             // UserInfoForm
             // 
@@ -407,14 +411,14 @@ namespace WindowsFormsApp_Pharmacy_Management
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtUserIdDetail;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.TextBox txtIdPwdDetail;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtIdOrgDetail;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView dgvUsers;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnSave;
     }
 }
