@@ -10,20 +10,21 @@ using System.Windows.Forms;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using DevExpress.XtraGrid.Columns; // Cần thiết cho việc truy cập GridColumn
-using DevExpress.XtraGrid.Views.Grid; // Cần thiết cho GridView
+//using DevExpress.XtraGrid.Columns; // Các thư viện DevExpress đã bị loại bỏ
+//using DevExpress.XtraGrid.Views.Grid; // Các thư viện DevExpress đã bị loại bỏ
 using System.Globalization; // Dùng khi có sử dụng CultureInfo
+
 namespace WindowsFormsApp_Pharmacy_Management
 {
     // Khai báo Enum để định nghĩa các trạng thái
     public enum FormMode
     {
-        None = 0,     // Trạng thái ban đầu hoặc trạng thái xem
-        Insert = 1,   // Khi nhấn nút Thêm mới (01)
-        Update = 2,   // Khi nhấn nút Sửa (02)
-        Delete = 3    // Khi nhấn nút Xóa (03)
+        None = 0,      // Trạng thái ban đầu hoặc trạng thái xem
+        Insert = 1,    // Khi nhấn nút Thêm mới (01)
+        Update = 2,    // Khi nhấn nút Sửa (02)
+        Delete = 3     // Khi nhấn nút Xóa (03)
     }
-    
+
     public partial class UserInfoForm : Form
     {
         // 2. Khai báo biến lưu trữ trạng thái hiện tại (Form State)
@@ -60,32 +61,41 @@ namespace WindowsFormsApp_Pharmacy_Management
         // Disable các trường detail
         private void DisableDetailInfo()
         {
-            txtUserIdDetail.Enabled     = false;
-            txtIdOrgDetail.Enabled      = false;
-            txtIdDtDetail.Enabled       = false;
-            txtIdNoDetail.Enabled       = false;
-            txtUsernameDetail.Enabled   = false;
-            txtPhoneDetail.Enabled      = false;
-            txtEmailDetail.Enabled      = false;
-            txtIdPwdDetail.Enabled      = false;
+            txtUserIdDetail.Enabled = false;
+            txtIdOrgDetail.Enabled = false;
+            txtIdDtDetail.Enabled = false; // Áp dụng cho DateTimePicker/TextBox
+            txtIdNoDetail.Enabled = false;
+            txtUsernameDetail.Enabled = false;
+            txtPhoneDetail.Enabled = false;
+            txtEmailDetail.Enabled = false;
+            txtIdPwdDetail.Enabled = false;
         }
         // Enable các trường detail
         private void EnableDetailInfo()
         {
-            txtUserIdDetail.Enabled     = true;
-            txtIdOrgDetail.Enabled      = true;
-            txtIdDtDetail.Enabled       = true;
-            txtIdNoDetail.Enabled       = true;
-            txtUsernameDetail.Enabled   = true;
-            txtPhoneDetail.Enabled      = true;
-            txtEmailDetail.Enabled      = true;
-            txtIdPwdDetail.Enabled      = true;
+            txtUserIdDetail.Enabled = true;
+            txtIdOrgDetail.Enabled = true;
+            txtIdDtDetail.Enabled = true; // Áp dụng cho DateTimePicker/TextBox
+            txtIdNoDetail.Enabled = true;
+            txtUsernameDetail.Enabled = true;
+            txtPhoneDetail.Enabled = true;
+            txtEmailDetail.Enabled = true;
+            txtIdPwdDetail.Enabled = true;
         }
         private void ClearDetailInfo()
         {
             txtUserIdDetail.Text = "";
             txtIdOrgDetail.Text = "";
-            txtIdDtDetail.Text = "";
+            // Xử lý riêng cho DateTimePicker (hoặc để trống nếu là TextBox)
+            if (txtIdDtDetail is DateTimePicker dtp)
+            {
+                // Nếu là DateTimePicker, reset về ngày hôm nay hoặc ngày tối thiểu
+                dtp.Value = DateTime.Now;
+            }
+            else
+            {
+                txtIdDtDetail.Text = "";
+            }
             txtIdNoDetail.Text = "";
             txtUsernameDetail.Text = "";
             txtPhoneDetail.Text = "";
@@ -119,8 +129,6 @@ namespace WindowsFormsApp_Pharmacy_Management
                         JObject jsonResponse = JObject.Parse(responseBody);
                         JArray usersArray = (JArray)jsonResponse["users"];
 
-                        // Dòng này cần một hàm Convert JArray sang DataTable (hoặc phải dùng JArray.ToObject<DataTable>())
-                        // Lưu ý: Nếu dòng này lỗi, bạn phải đảm bảo đã cài Newtonsoft.Json và có hàm Convert JArray sang DataTable
                         dgvUsers.DataSource = usersArray.ToObject<DataTable>();
                     }
                     // Không cần MessageBox.Show khi reload
@@ -135,7 +143,7 @@ namespace WindowsFormsApp_Pharmacy_Management
         private string GetCellValue(DataGridViewRow row, string columnName)
         {
             // Kiểm tra xem ô có tồn tại và có giá trị không
-            if (row.Cells[columnName] != null && row.Cells[columnName].Value != null)
+            if (row.Cells[columnName] != null && row.Cells[columnName].Value != null && row.Cells[columnName].Value != DBNull.Value)
             {
                 return row.Cells[columnName].Value.ToString();
             }
@@ -186,6 +194,15 @@ namespace WindowsFormsApp_Pharmacy_Management
                 // Đặt tên hiển thị từ Schema
                 gridColumn.HeaderText = col.HeaderText;
                 gridColumn.Name = col.DataField;
+
+                // --- KHẮC PHỤC LỖI HIỂN THỊ ĐỊNH DẠNG NGÀY TRÊN GRID ---
+                if (col.DataField == "ID_DT" || col.DataField == "WORK_DT" || col.DataField == "UPD_DT")
+                {
+                    // Định dạng hiển thị dd/MM/yyyy trên DataGridView
+                    gridColumn.DefaultCellStyle.Format = "dd/MM/yyyy";
+                }
+                // ----------------------------------------------------
+
                 dgvUsers.Columns.Add(gridColumn);
             }
 
@@ -240,7 +257,7 @@ namespace WindowsFormsApp_Pharmacy_Management
                         await ReloadDataAsync();
                         currentMode = FormMode.None;
                         DisableDetailInfo();
-                        ClearDetailInfo(); // Cần đảm bảo hàm này tồn tại
+                        ClearDetailInfo();
                     }
                     else
                     {
@@ -289,16 +306,8 @@ namespace WindowsFormsApp_Pharmacy_Management
                     if (response.IsSuccessStatusCode)
                     {
                         // API Python trả về danh sách người dùng JSON: {"users": [...]}
-                        // Sử dụng JObject để phân tích và hiển thị lên DataGridView
                         JObject jsonResponse = JObject.Parse(responseBody);
                         JArray usersArray = (JArray)jsonResponse["users"];
-
-                        // Chuyển đổi JArray thành DataTable hoặc BindingSource để gán cho DataGridView
-                        // (Bạn có thể cần một hàm helper để chuyển đổi JArray sang DataTable)
-                        // Ví dụ đơn giản:
-
-                        // Gán trực tiếp dữ liệu thô (yêu cầu cài đặt System.Text.Json hoặc sử dụng Newtonsoft.Json)
-                        // Nếu bạn không dùng DataTable, bạn phải đảm bảo cột DataGridView khớp với tên thuộc tính JSON
 
                         dgvUsers.DataSource = usersArray.ToObject<DataTable>(); // Hoặc List<UserObject>
                         MessageBox.Show("Tìm kiếm thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -322,7 +331,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             txtUserIdDetail.Focus();
             currentMode = FormMode.Insert;
         }
-        
+
 
         private async void btnDelete_Click(object sender, EventArgs e)
         {
@@ -344,6 +353,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             {
                 // GỌI HÀM IUD CHUNG VỚI FormMode.Delete
                 MessageBox.Show("Bắt đầu xử lý xóa tài khoản");
+                // Các tham số khác là NULL hoặc rỗng khi xóa
                 await CallPythonServiceIUD(FormMode.Delete, null, null, null, null, null, userid, null, null);
             }
         }
@@ -356,43 +366,51 @@ namespace WindowsFormsApp_Pharmacy_Management
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            // ... (Logic lấy và định dạng dữ liệu, xử lý id_dt_formatted giữ nguyên) ...
             string userid = txtUserIdDetail.Text.Trim();
-            string userName = txtUsernameDetail.Text.Trim(); // Lấy từ TextBox
-            string email = txtEmailDetail.Text.Trim();       // Lấy từ TextBox
-            string mobi_phone = txtPhoneDetail.Text.Trim();  // Lấy từ TextBox
-            string id_no = txtIdNoDetail.Text.Trim();        // Lấy từ TextBox
-            string id_org = txtIdOrgDetail.Text.Trim();      // Lấy từ TextBox
-            string id_dt_raw = txtIdDtDetail.Text.Trim();    // Ngày cấp thô
-            string pwd = txtIdPwdDetail.Text;                // Mật khẩu
+            string userName = txtUsernameDetail.Text.Trim();
+            string email = txtEmailDetail.Text.Trim();
+            string mobi_phone = txtPhoneDetail.Text.Trim();
+            string id_no = txtIdNoDetail.Text.Trim();
+            string id_org = txtIdOrgDetail.Text.Trim();
+
+            // Xử lý Ngày cấp - Lấy giá trị theo loại Control
+            string id_dt_raw;
+            if (txtIdDtDetail is DateTimePicker dtp)
+            {
+                // Nếu là DateTimePicker, lấy giá trị đã được chọn (dạng dd/MM/yyyy nếu format đúng)
+                id_dt_raw = dtp.Value.ToString("dd/MM/yyyy");
+            }
+            else
+            {
+                // Nếu là TextBox/MaskedTextBox
+                id_dt_raw = txtIdDtDetail.Text.Trim();
+            }
+
+            string pwd = txtIdPwdDetail.Text;
 
             // --- XỬ LÝ CHUYỂN ĐỔI NGÀY THÁNG SANG YYYYMMDD (Oracle) ---
             string id_dt_formatted;
-            // KHẮC PHỤC LỖI CS0165: Gán giá trị mặc định cho dateValue
-            DateTime dateValue = DateTime.MinValue;
-
-            // Các định dạng có thể chấp nhận
-            string[] acceptedFormats = new[] {
-            "dd/MM/yyyy", // Định dạng ngắn bạn muốn hiển thị
-            "dddd, MMMM dd, yyyy" // Định dạng dài (default)
-             };
-
+            DateTime dateValue;
             bool success = false;
 
-            // 1. Thử phân tích chuỗi ngày cấp thô
-            foreach (var format in acceptedFormats)
+            // Định dạng ưu tiên (dành cho người dùng nhập/chọn)
+            string[] acceptedFormats = new[] { "dd/MM/yyyy" };
+
+            // 1. Thử phân tích chuỗi ngày cấp thô (chỉ cần định dạng dd/MM/yyyy là đủ)
+            success = DateTime.TryParseExact(
+                id_dt_raw,
+                "dd/MM/yyyy",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out dateValue);
+
+            // Nếu là DateTimePicker, TryParseExact không cần thiết vì Value luôn là DateTime hợp lệ
+            if (!success && txtIdDtDetail is DateTimePicker dtp1)
             {
-                if (DateTime.TryParseExact(
-                    id_dt_raw,
-                    format,
-                    CultureInfo.InvariantCulture,
-                    DateTimeStyles.None,
-                    out dateValue))
-                {
-                    success = true;
-                    break;
-                }
+                dateValue = dtp1.Value;
+                success = true;
             }
+
 
             if (success)
             {
@@ -401,12 +419,12 @@ namespace WindowsFormsApp_Pharmacy_Management
             }
             else if (string.IsNullOrEmpty(id_dt_raw))
             {
-                // Cho phép ngày cấp để trống 
+                // Cho phép ngày cấp để trống (NULL cho DB)
                 id_dt_formatted = string.Empty;
             }
             else
             {
-                // Xử lý lỗi nếu không khớp bất kỳ định dạng nào
+                // Xử lý lỗi nếu không khớp định dạng
                 MessageBox.Show($"Lỗi: Ngày cấp phải theo định dạng 'dd/MM/yyyy'.", "Lỗi định dạng ngày", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -431,18 +449,15 @@ namespace WindowsFormsApp_Pharmacy_Management
         private void dgvUsers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // DÒNG KIỂM TRA QUAN TRỌNG: Loại trừ hàng tiêu đề (header row)
-            if (e.RowIndex < 0) // Khi click vào tiêu đề, RowIndex là -1
+            if (e.RowIndex < 0)
             {
                 return;
             }
-            // 2. Lấy dòng dữ liệu được chọn
+
             DataGridViewRow selectedRow = dgvUsers.Rows[e.RowIndex];
 
             try
             {
-                // 3. Lấy giá trị từ các ô và gán vào các TextBox chi tiết
-                //    (Tên cột phải khớp chính xác với DataField đã khai báo trong GridSchema)
-
                 // Khóa chính và các trường khác
                 txtUserIdDetail.Text = GetCellValue(selectedRow, "USER_ID");
                 txtIdPwdDetail.Text = GetCellValue(selectedRow, "PWD");
@@ -454,26 +469,47 @@ namespace WindowsFormsApp_Pharmacy_Management
                 txtIdNoDetail.Text = GetCellValue(selectedRow, "ID_NO");
                 txtIdOrgDetail.Text = GetCellValue(selectedRow, "ID_ORG");
 
-                // Cột PWD (Mật khẩu - nếu có)
-                // Lưu ý: Không nên hiển thị mật khẩu đã hash ra TextBox. Có thể để trống hoặc hiển thị placeholder.
-                // Ví dụ:
-                //txtIdPwdDetail.Text = string.Empty; // Luôn để trống khi xem
-                                                    // HOẶC: txtIdPwdDetail.Text = "******";
-
                 // Xử lý Ngày cấp (ID_DT)
                 string idDtRaw = GetCellValue(selectedRow, "ID_DT");
-                if (!string.IsNullOrEmpty(idDtRaw) && DateTime.TryParseExact(idDtRaw, "yyyyMMdd",
-                                                      CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime dt))
+
+                // Nếu là DateTimePicker, gán giá trị hợp lệ
+                if (txtIdDtDetail is DateTimePicker dtp)
                 {
-                    // Chuyển từ YYYYMMDD sang định dạng dd/MM/yyyy để dễ đọc
-                    txtIdDtDetail.Text = dt.ToString("dd/MM/yyyy");
+                    if (!string.IsNullOrEmpty(idDtRaw) && DateTime.TryParseExact(
+                        idDtRaw,
+                        "yyyyMMdd", // Định dạng từ DB
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out DateTime dt))
+                    {
+                        dtp.Value = dt;
+                    }
+                    else
+                    {
+                        // Nếu DB là NULL hoặc không hợp lệ, set lại ngày mặc định/reset
+                        // Có thể đặt dtp.Value = DateTime.Now; hoặc reset trạng thái hiển thị
+                    }
                 }
+                // Nếu là TextBox/MaskedTextBox, vẫn dùng logic hiển thị định dạng
                 else
                 {
-                    txtIdDtDetail.Text = idDtRaw; // Gán chuỗi thô nếu không phải định dạng ngày
+                    if (!string.IsNullOrEmpty(idDtRaw) && DateTime.TryParseExact(
+                        idDtRaw,
+                        "yyyyMMdd",
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out DateTime dt))
+                    {
+                        // Chuyển từ YYYYMMDD sang định dạng dd/MM/yyyy để dễ đọc
+                        txtIdDtDetail.Text = dt.ToString("dd/MM/yyyy");
+                    }
+                    else
+                    {
+                        txtIdDtDetail.Text = idDtRaw; // Gán chuỗi thô nếu không phải định dạng ngày
+                    }
                 }
 
-                // 4. Đặt form về trạng thái xem (khóa chỉnh sửa)
+                // Đặt form về trạng thái xem (khóa chỉnh sửa)
                 DisableDetailInfo();
             }
             catch (Exception ex)
@@ -484,7 +520,7 @@ namespace WindowsFormsApp_Pharmacy_Management
 
         private void txtIdDtDetail_ValueChanged(object sender, EventArgs e)
         {
-
+            // Chỉ cần thiết nếu txtIdDtDetail là DateTimePicker
         }
     }
 }
