@@ -25,7 +25,7 @@ namespace WindowsFormsApp_Pharmacy_Management
         Delete = 3     // Khi nhấn nút Xóa (03)
     }
 
-    public partial class UserInfoForm : Form
+    public partial class frm_user_info : Form
     {
         // 2. Khai báo biến lưu trữ trạng thái hiện tại (Form State)
         private FormMode currentMode = FormMode.None;
@@ -52,7 +52,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // Bỏ PWD nếu không muốn hiển thị trên lưới
             // new ColumnConfig("PWD", "Mật Khẩu (Hash)"), 
         };
-        public UserInfoForm()
+        public frm_user_info()
         {
             InitializeComponent();
             SetupGridColumns(); // Bắt buộc gọi trước khi gán DataSource
@@ -63,7 +63,7 @@ namespace WindowsFormsApp_Pharmacy_Management
         {
             txtUserIdDetail.Enabled = false;
             txtIdOrgDetail.Enabled = false;
-            txtIdDtDetail.Enabled = false; // Áp dụng cho DateTimePicker/TextBox
+            dtp_IdDtDetail.Enabled = false; // Áp dụng cho DateTimePicker/TextBox
             txtIdNoDetail.Enabled = false;
             txtUsernameDetail.Enabled = false;
             txtPhoneDetail.Enabled = false;
@@ -75,7 +75,7 @@ namespace WindowsFormsApp_Pharmacy_Management
         {
             txtUserIdDetail.Enabled = true;
             txtIdOrgDetail.Enabled = true;
-            txtIdDtDetail.Enabled = true; // Áp dụng cho DateTimePicker/TextBox
+            dtp_IdDtDetail.Enabled = true; // Áp dụng cho DateTimePicker/TextBox
             txtIdNoDetail.Enabled = true;
             txtUsernameDetail.Enabled = true;
             txtPhoneDetail.Enabled = true;
@@ -87,14 +87,14 @@ namespace WindowsFormsApp_Pharmacy_Management
             txtUserIdDetail.Text = "";
             txtIdOrgDetail.Text = "";
             // Xử lý riêng cho DateTimePicker (hoặc để trống nếu là TextBox)
-            if (txtIdDtDetail is DateTimePicker dtp)
+            if (dtp_IdDtDetail is DateTimePicker dtp)
             {
                 // Nếu là DateTimePicker, reset về ngày hôm nay hoặc ngày tối thiểu
                 dtp.Value = DateTime.Now;
             }
             else
             {
-                txtIdDtDetail.Text = "";
+                dtp_IdDtDetail.Text = "";
             }
             txtIdNoDetail.Text = "";
             txtUsernameDetail.Text = "";
@@ -375,7 +375,7 @@ namespace WindowsFormsApp_Pharmacy_Management
 
             // Xử lý Ngày cấp - Lấy giá trị theo loại Control
             string id_dt_raw;
-            if (txtIdDtDetail is DateTimePicker dtp)
+            if (dtp_IdDtDetail is DateTimePicker dtp)
             {
                 // Nếu là DateTimePicker, lấy giá trị đã được chọn (dạng dd/MM/yyyy nếu format đúng)
                 id_dt_raw = dtp.Value.ToString("dd/MM/yyyy");
@@ -383,7 +383,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             else
             {
                 // Nếu là TextBox/MaskedTextBox
-                id_dt_raw = txtIdDtDetail.Text.Trim();
+                id_dt_raw = dtp_IdDtDetail.Text.Trim();
             }
 
             string pwd = txtIdPwdDetail.Text;
@@ -405,7 +405,7 @@ namespace WindowsFormsApp_Pharmacy_Management
                 out dateValue);
 
             // Nếu là DateTimePicker, TryParseExact không cần thiết vì Value luôn là DateTime hợp lệ
-            if (!success && txtIdDtDetail is DateTimePicker dtp1)
+            if (!success && dtp_IdDtDetail is DateTimePicker dtp1)
             {
                 dateValue = dtp1.Value;
                 success = true;
@@ -473,7 +473,7 @@ namespace WindowsFormsApp_Pharmacy_Management
                 string idDtRaw = GetCellValue(selectedRow, "ID_DT");
 
                 // Nếu là DateTimePicker, gán giá trị hợp lệ
-                if (txtIdDtDetail is DateTimePicker dtp)
+                if (dtp_IdDtDetail is DateTimePicker dtp)
                 {
                     if (!string.IsNullOrEmpty(idDtRaw) && DateTime.TryParseExact(
                         idDtRaw,
@@ -501,11 +501,11 @@ namespace WindowsFormsApp_Pharmacy_Management
                         out DateTime dt))
                     {
                         // Chuyển từ YYYYMMDD sang định dạng dd/MM/yyyy để dễ đọc
-                        txtIdDtDetail.Text = dt.ToString("dd/MM/yyyy");
+                        dtp_IdDtDetail.Text = dt.ToString("dd/MM/yyyy");
                     }
                     else
                     {
-                        txtIdDtDetail.Text = idDtRaw; // Gán chuỗi thô nếu không phải định dạng ngày
+                        dtp_IdDtDetail.Text = idDtRaw; // Gán chuỗi thô nếu không phải định dạng ngày
                     }
                 }
 

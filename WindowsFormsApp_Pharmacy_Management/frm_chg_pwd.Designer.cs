@@ -1,7 +1,7 @@
 ﻿
 namespace WindowsFormsApp_Pharmacy_Management
 {
-    partial class ChangePasswordForm
+    partial class frm_chg_pwd
     {
         /// <summary>
         /// Required designer variable.

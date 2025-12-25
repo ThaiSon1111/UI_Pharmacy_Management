@@ -17,9 +17,9 @@ using DevExpress.XtraGrid.Views.Grid; // Cần thiết cho GridView
 
 namespace WindowsFormsApp_Pharmacy_Management
 {
-    public partial class ChangePasswordForm : Form
+    public partial class frm_chg_pwd : Form
     {
-        public ChangePasswordForm()
+        public frm_chg_pwd()
         {
             InitializeComponent();
         }

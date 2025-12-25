@@ -1,7 +1,7 @@
 ﻿
 namespace WindowsFormsApp_Pharmacy_Management
 {
-    partial class UserInfoForm
+    partial class frm_user_info
     {
         /// <summary>
         /// Required designer variable.
@@ -59,7 +59,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtUserIdDetail = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvUsers = new System.Windows.Forms.DataGridView();
-            this.txtIdDtDetail = new System.Windows.Forms.DateTimePicker();
+            this.dtp_IdDtDetail = new System.Windows.Forms.DateTimePicker();
             this.gbSearch.SuspendLayout();
             this.gbDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
@@ -86,6 +86,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             // btnReload
             // 
+            this.btnReload.Enabled = false;
             this.btnReload.Location = new System.Drawing.Point(936, 22);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(115, 29);
@@ -98,7 +99,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnSearch.Location = new System.Drawing.Point(815, 22);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(115, 29);
-            this.btnSearch.TabIndex = 6;
+            this.btnSearch.TabIndex = 3;
             this.btnSearch.Text = "Tra cứu";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
@@ -108,7 +109,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtSearchPhone.Location = new System.Drawing.Point(602, 22);
             this.txtSearchPhone.Name = "txtSearchPhone";
             this.txtSearchPhone.Size = new System.Drawing.Size(170, 26);
-            this.txtSearchPhone.TabIndex = 5;
+            this.txtSearchPhone.TabIndex = 2;
             // 
             // label3
             // 
@@ -124,7 +125,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtSearchEmail.Location = new System.Drawing.Point(362, 25);
             this.txtSearchEmail.Name = "txtSearchEmail";
             this.txtSearchEmail.Size = new System.Drawing.Size(157, 26);
-            this.txtSearchEmail.TabIndex = 3;
+            this.txtSearchEmail.TabIndex = 1;
             // 
             // label2
             // 
@@ -155,7 +156,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             this.gbDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbDetails.Controls.Add(this.txtIdDtDetail);
+            this.gbDetails.Controls.Add(this.dtp_IdDtDetail);
             this.gbDetails.Controls.Add(this.btnSave);
             this.gbDetails.Controls.Add(this.btnEdit);
             this.gbDetails.Controls.Add(this.btnDelete);
@@ -187,7 +188,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnSave.Location = new System.Drawing.Point(397, 121);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(105, 30);
-            this.btnSave.TabIndex = 21;
+            this.btnSave.TabIndex = 16;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -197,7 +198,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnEdit.Location = new System.Drawing.Point(155, 121);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(100, 31);
-            this.btnEdit.TabIndex = 20;
+            this.btnEdit.TabIndex = 14;
             this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -207,7 +208,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnDelete.Location = new System.Drawing.Point(281, 121);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 31);
-            this.btnDelete.TabIndex = 18;
+            this.btnDelete.TabIndex = 15;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -217,22 +218,22 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnAddNew.Location = new System.Drawing.Point(37, 121);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(100, 31);
-            this.btnAddNew.TabIndex = 16;
+            this.btnAddNew.TabIndex = 13;
             this.btnAddNew.Text = "Thêm mới";
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtIdPwdDetail
             // 
-            this.txtIdPwdDetail.Location = new System.Drawing.Point(362, 24);
+            this.txtIdPwdDetail.Location = new System.Drawing.Point(420, 28);
             this.txtIdPwdDetail.Name = "txtIdPwdDetail";
             this.txtIdPwdDetail.Size = new System.Drawing.Size(152, 26);
-            this.txtIdPwdDetail.TabIndex = 15;
+            this.txtIdPwdDetail.TabIndex = 5;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(277, 31);
+            this.label11.Location = new System.Drawing.Point(335, 35);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(75, 20);
             this.label11.TabIndex = 14;
@@ -240,15 +241,15 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             // txtIdOrgDetail
             // 
-            this.txtIdOrgDetail.Location = new System.Drawing.Point(878, 66);
+            this.txtIdOrgDetail.Location = new System.Drawing.Point(999, 69);
             this.txtIdOrgDetail.Name = "txtIdOrgDetail";
-            this.txtIdOrgDetail.Size = new System.Drawing.Size(170, 26);
-            this.txtIdOrgDetail.TabIndex = 13;
+            this.txtIdOrgDetail.Size = new System.Drawing.Size(272, 26);
+            this.txtIdOrgDetail.TabIndex = 12;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(797, 70);
+            this.label10.Location = new System.Drawing.Point(918, 73);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(62, 20);
             this.label10.TabIndex = 12;
@@ -257,7 +258,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(534, 72);
+            this.label9.Location = new System.Drawing.Point(592, 76);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(75, 20);
             this.label9.TabIndex = 10;
@@ -265,7 +266,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             // txtIdNoDetail
             // 
-            this.txtIdNoDetail.Location = new System.Drawing.Point(362, 70);
+            this.txtIdNoDetail.Location = new System.Drawing.Point(420, 74);
             this.txtIdNoDetail.Name = "txtIdNoDetail";
             this.txtIdNoDetail.Size = new System.Drawing.Size(152, 26);
             this.txtIdNoDetail.TabIndex = 9;
@@ -273,7 +274,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(294, 74);
+            this.label8.Location = new System.Drawing.Point(352, 78);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(54, 20);
             this.label8.TabIndex = 8;
@@ -283,8 +284,8 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             this.txtUsernameDetail.Location = new System.Drawing.Point(117, 70);
             this.txtUsernameDetail.Name = "txtUsernameDetail";
-            this.txtUsernameDetail.Size = new System.Drawing.Size(152, 26);
-            this.txtUsernameDetail.TabIndex = 7;
+            this.txtUsernameDetail.Size = new System.Drawing.Size(212, 26);
+            this.txtUsernameDetail.TabIndex = 8;
             // 
             // label7
             // 
@@ -297,16 +298,16 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             // txtPhoneDetail
             // 
-            this.txtPhoneDetail.Location = new System.Drawing.Point(878, 26);
+            this.txtPhoneDetail.Location = new System.Drawing.Point(999, 29);
             this.txtPhoneDetail.Name = "txtPhoneDetail";
-            this.txtPhoneDetail.Size = new System.Drawing.Size(170, 26);
-            this.txtPhoneDetail.TabIndex = 5;
+            this.txtPhoneDetail.Size = new System.Drawing.Size(272, 26);
+            this.txtPhoneDetail.TabIndex = 7;
             this.txtPhoneDetail.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(797, 30);
+            this.label6.Location = new System.Drawing.Point(918, 33);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(41, 20);
             this.label6.TabIndex = 4;
@@ -314,15 +315,15 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             // txtEmailDetail
             // 
-            this.txtEmailDetail.Location = new System.Drawing.Point(625, 28);
+            this.txtEmailDetail.Location = new System.Drawing.Point(683, 32);
             this.txtEmailDetail.Name = "txtEmailDetail";
-            this.txtEmailDetail.Size = new System.Drawing.Size(152, 26);
-            this.txtEmailDetail.TabIndex = 3;
+            this.txtEmailDetail.Size = new System.Drawing.Size(211, 26);
+            this.txtEmailDetail.TabIndex = 6;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(557, 32);
+            this.label5.Location = new System.Drawing.Point(615, 36);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(48, 20);
             this.label5.TabIndex = 2;
@@ -332,8 +333,8 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             this.txtUserIdDetail.Location = new System.Drawing.Point(117, 25);
             this.txtUserIdDetail.Name = "txtUserIdDetail";
-            this.txtUserIdDetail.Size = new System.Drawing.Size(152, 26);
-            this.txtUserIdDetail.TabIndex = 1;
+            this.txtUserIdDetail.Size = new System.Drawing.Size(212, 26);
+            this.txtUserIdDetail.TabIndex = 4;
             // 
             // label4
             // 
@@ -360,18 +361,18 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.dgvUsers.TabIndex = 3;
             this.dgvUsers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellClick);
             // 
-            // txtIdDtDetail
+            // dtp_IdDtDetail
             // 
-            this.txtIdDtDetail.CustomFormat = "dd/MM/yyyy";
-            this.txtIdDtDetail.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.txtIdDtDetail.Location = new System.Drawing.Point(625, 69);
-            this.txtIdDtDetail.Name = "txtIdDtDetail";
-            this.txtIdDtDetail.ShowUpDown = true;
-            this.txtIdDtDetail.Size = new System.Drawing.Size(152, 26);
-            this.txtIdDtDetail.TabIndex = 23;
-            this.txtIdDtDetail.ValueChanged += new System.EventHandler(this.txtIdDtDetail_ValueChanged);
+            this.dtp_IdDtDetail.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtp_IdDtDetail.CustomFormat = "dd/MM/yyyy";
+            this.dtp_IdDtDetail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtp_IdDtDetail.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtp_IdDtDetail.Location = new System.Drawing.Point(683, 74);
+            this.dtp_IdDtDetail.Name = "dtp_IdDtDetail";
+            this.dtp_IdDtDetail.Size = new System.Drawing.Size(211, 26);
+            this.dtp_IdDtDetail.TabIndex = 10;
             // 
-            // UserInfoForm
+            // frm_user_info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -379,7 +380,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.Controls.Add(this.dgvUsers);
             this.Controls.Add(this.gbDetails);
             this.Controls.Add(this.gbSearch);
-            this.Name = "UserInfoForm";
+            this.Name = "frm_user_info";
             this.Text = "Thông Tin & Tra Cứu Tài Khoản";
             this.Load += new System.EventHandler(this.UserInfoForm_Load);
             this.gbSearch.ResumeLayout(false);
@@ -423,6 +424,6 @@ namespace WindowsFormsApp_Pharmacy_Management
         private System.Windows.Forms.DataGridView dgvUsers;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.DateTimePicker txtIdDtDetail;
+        private System.Windows.Forms.DateTimePicker dtp_IdDtDetail;
     }
 }

@@ -95,17 +95,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangePasswordForm.cs">
+    <Compile Include="frm_chg_pwd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChangePasswordForm.Designer.cs">
-      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    <Compile Include="frm_chg_pwd.Designer.cs">
+      <DependentUpon>frm_chg_pwd.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserInfoForm.cs">
+    <Compile Include="frm_user_info.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserInfoForm.Designer.cs">
-      <DependentUpon>UserInfoForm.cs</DependentUpon>
+    <Compile Include="frm_user_info.Designer.cs">
+      <DependentUpon>frm_user_info.cs</DependentUpon>
     </Compile>
     <Compile Include="SessionManager.cs" />
     <Compile Include="MainForm.cs">
@@ -114,22 +114,22 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.cs">
+    <Compile Include="frm_login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
-      <DependentUpon>LoginForm.cs</DependentUpon>
+    <Compile Include="frm_login.Designer.cs">
+      <DependentUpon>frm_login.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ChangePasswordForm.resx">
-      <DependentUpon>ChangePasswordForm.cs</DependentUpon>
+    <EmbeddedResource Include="frm_chg_pwd.resx">
+      <DependentUpon>frm_chg_pwd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
-      <DependentUpon>LoginForm.cs</DependentUpon>
+    <EmbeddedResource Include="frm_login.resx">
+      <DependentUpon>frm_login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -140,8 +140,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserInfoForm.resx">
-      <DependentUpon>UserInfoForm.cs</DependentUpon>
+    <EmbeddedResource Include="frm_user_info.resx">
+      <DependentUpon>frm_user_info.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">
       <SubType>Designer</SubType>

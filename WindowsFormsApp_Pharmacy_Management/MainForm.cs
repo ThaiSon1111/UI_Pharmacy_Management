@@ -56,7 +56,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.Hide();
 
             // 2. Mở lại LoginForm
-            LoginForm login = new LoginForm();
+            frm_login login = new frm_login();
 
             // Đóng MainForm khi LoginForm được mở và MainForm không còn cần thiết
             login.FormClosed += (s, args) => this.Close();
@@ -66,14 +66,14 @@ namespace WindowsFormsApp_Pharmacy_Management
         private void tsmiChangePassword_Click(object sender, EventArgs e)
         {
             // Tạo và hiển thị Form Đổi Mật khẩu
-    ChangePasswordForm changePassForm = new ChangePasswordForm();
+    frm_chg_pwd changePassForm = new frm_chg_pwd();
     changePassForm.ShowDialog(); // Dùng ShowDialog() để chặn MainForm cho đến khi Form này đóng
         }
 
         private void tsmiActInfo_Click(object sender, EventArgs e)
         {
             // Tạo và hiển thị Form Thông tin tài khoản
-            UserInfoForm userInfoForm = new UserInfoForm();
+            frm_user_info userInfoForm = new frm_user_info();
             userInfoForm.Show();
         }
     }

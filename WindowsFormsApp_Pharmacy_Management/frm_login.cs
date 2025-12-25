@@ -18,13 +18,13 @@ using DevExpress.XtraGrid.Views.Grid; // Cần thiết cho GridView
 
 namespace WindowsFormsApp_Pharmacy_Management
 {
-    public partial class LoginForm : Form
+    public partial class frm_login : Form
     {
-        public LoginForm()
+        public frm_login()
         {
             InitializeComponent();
         }
-
+        //btn_login
         private async void button1_Click(object sender, EventArgs e) // PHẢI LÀ async
         {
 
