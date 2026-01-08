@@ -95,16 +95,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frm_chg_pwd.cs">
+    <Compile Include="SMAPP-CustomerInfo\frm_customer_info.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_chg_pwd.Designer.cs">
+    <Compile Include="SMAPP-CustomerInfo\frm_customer_info.Designer.cs">
+      <DependentUpon>frm_customer_info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SMAPP-UserMangement\frm_chg_pwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SMAPP-UserMangement\frm_chg_pwd.Designer.cs">
       <DependentUpon>frm_chg_pwd.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_user_info.cs">
+    <Compile Include="SMAPP-UserMangement\frm_user_info.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_user_info.Designer.cs">
+    <Compile Include="SMAPP-UserMangement\frm_user_info.Designer.cs">
       <DependentUpon>frm_user_info.cs</DependentUpon>
     </Compile>
     <Compile Include="SessionManager.cs" />
@@ -114,21 +120,24 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_login.cs">
+    <Compile Include="SMAPP-UserMangement\frm_login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_login.Designer.cs">
+    <Compile Include="SMAPP-UserMangement\frm_login.Designer.cs">
       <DependentUpon>frm_login.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frm_chg_pwd.resx">
+    <EmbeddedResource Include="SMAPP-CustomerInfo\frm_customer_info.resx">
+      <DependentUpon>frm_customer_info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SMAPP-UserMangement\frm_chg_pwd.resx">
       <DependentUpon>frm_chg_pwd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_login.resx">
+    <EmbeddedResource Include="SMAPP-UserMangement\frm_login.resx">
       <DependentUpon>frm_login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -140,7 +149,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="frm_user_info.resx">
+    <EmbeddedResource Include="SMAPP-UserMangement\frm_user_info.resx">
       <DependentUpon>frm_user_info.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Oracle.DataAccess.Common.Configuration.Section.xsd">

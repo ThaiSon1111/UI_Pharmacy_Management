@@ -25,21 +25,21 @@ namespace WindowsFormsApp_Pharmacy_Management
             if (isLoggedIn)
             {
                 // Ẩn mục "Đăng nhập"
-                tsmiLogin.Visible = false;
+                tsmi_System_Login.Visible = false;
 
                 // Hiện các mục "Đăng xuất", "Đổi mật khẩu", v.v.
-                tsmiLogout.Visible = true;
-                tsmiChangePassword.Visible = true;
+                tsmi_System_Logout.Visible = true;
+                tsmi_System_ChangePassword.Visible = true;
                 // ... (thêm các mục khác nếu cần)
             }
             else // Nếu Chưa đăng nhập (dùng cho chức năng Đăng xuất)
             {
                 // Hiện mục "Đăng nhập"
-                tsmiLogin.Visible = true;
+                tsmi_System_Login.Visible = true;
 
                 // Ẩn các mục "Đăng xuất", "Đổi mật khẩu", v.v.
-                tsmiLogout.Visible = false;
-                tsmiChangePassword.Visible = false;
+                tsmi_System_Logout.Visible = false;
+                tsmi_System_ChangePassword.Visible = false;
             }
         }
         private void hệThốngToolStripMenuItem_Click(object sender, EventArgs e)
@@ -75,6 +75,20 @@ namespace WindowsFormsApp_Pharmacy_Management
             // Tạo và hiển thị Form Thông tin tài khoản
             frm_user_info userInfoForm = new frm_user_info();
             userInfoForm.Show();
+        }
+
+        private void tsmi_CustomerManagement_Click(object sender, EventArgs e)
+        {
+            // Tạo và hiển thị Form Thông tin tài khoản
+            frm_customer_info CustomerInfoForm = new frm_customer_info();
+            CustomerInfoForm.Show();
+        }
+
+        private void tsmi_System_Exit_Click(object sender, EventArgs e)
+        {
+            // ***** BƯỚC QUAN TRỌNG: Xóa trạng thái người dùng khi đăng xuất *****
+            SessionManager.ClearUser();
+            this.Close();
         }
     }
 }
