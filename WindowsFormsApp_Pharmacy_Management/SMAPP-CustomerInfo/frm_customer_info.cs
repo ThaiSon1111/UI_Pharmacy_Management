@@ -179,14 +179,7 @@ namespace WindowsFormsApp_Pharmacy_Management
 
         private void UserInfoForm_Load(object sender, EventArgs e)
         {
-            // Nếu có tên đăng nhập trong Session, tự động điền vào ô tìm kiếm và thực hiện tìm kiếm
-            string loggedInUser = SessionManager.LoggedInUsername;
-            if (!string.IsNullOrEmpty(loggedInUser))
-            {
-                txtSearchUserId.Text = loggedInUser;
-                // Tự động gọi hàm tìm kiếm khi Form tải
-                btnSearch_Click(sender, e);
-            }
+            btnSearch_Click(sender, e);
         }
         //Hàm để tự động tạo cột, đặt tên và đặt thứ tự theo GridSchema:
         private void SetupGridColumns()
