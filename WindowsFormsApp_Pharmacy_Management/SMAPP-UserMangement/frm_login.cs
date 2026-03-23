@@ -129,5 +129,12 @@ namespace WindowsFormsApp_Pharmacy_Management
         {
 
         }
+
+        private void lb_chg_pass_Click(object sender, EventArgs e)
+        {
+            // Ẩn LoginForm hiện tại và Mở MainForm
+            frm_chg_pwd chg_pass = new frm_chg_pwd();
+            chg_pass.Show();
+        }
     }
 }

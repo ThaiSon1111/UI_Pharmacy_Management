@@ -37,12 +37,14 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtConfirmPass = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.lbUser = new System.Windows.Forms.Label();
+            this.txtUser = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // txtCurrentPass
             // 
             this.txtCurrentPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCurrentPass.Location = new System.Drawing.Point(321, 36);
+            this.txtCurrentPass.Location = new System.Drawing.Point(325, 137);
             this.txtCurrentPass.Name = "txtCurrentPass";
             this.txtCurrentPass.Size = new System.Drawing.Size(662, 48);
             this.txtCurrentPass.TabIndex = 7;
@@ -51,7 +53,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             this.lblPassword.AutoSize = true;
             this.lblPassword.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPassword.Location = new System.Drawing.Point(34, 43);
+            this.lblPassword.Location = new System.Drawing.Point(38, 144);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(275, 41);
             this.lblPassword.TabIndex = 5;
@@ -60,7 +62,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // txtNewPass
             // 
             this.txtNewPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNewPass.Location = new System.Drawing.Point(321, 131);
+            this.txtNewPass.Location = new System.Drawing.Point(325, 237);
             this.txtNewPass.Name = "txtNewPass";
             this.txtNewPass.Size = new System.Drawing.Size(662, 48);
             this.txtNewPass.TabIndex = 9;
@@ -69,7 +71,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(34, 138);
+            this.label1.Location = new System.Drawing.Point(38, 244);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(227, 41);
             this.label1.TabIndex = 8;
@@ -78,7 +80,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // btnConfirm
             // 
             this.btnConfirm.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfirm.Location = new System.Drawing.Point(545, 343);
+            this.btnConfirm.Location = new System.Drawing.Point(549, 434);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(193, 66);
             this.btnConfirm.TabIndex = 10;
@@ -89,7 +91,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // txtConfirmPass
             // 
             this.txtConfirmPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtConfirmPass.Location = new System.Drawing.Point(321, 235);
+            this.txtConfirmPass.Location = new System.Drawing.Point(325, 326);
             this.txtConfirmPass.Name = "txtConfirmPass";
             this.txtConfirmPass.Size = new System.Drawing.Size(662, 48);
             this.txtConfirmPass.TabIndex = 12;
@@ -98,7 +100,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(34, 242);
+            this.label2.Location = new System.Drawing.Point(38, 333);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(290, 41);
             this.label2.TabIndex = 11;
@@ -107,7 +109,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Times New Roman", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(790, 343);
+            this.btnCancel.Location = new System.Drawing.Point(794, 434);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(193, 66);
             this.btnCancel.TabIndex = 13;
@@ -115,11 +117,31 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // ChangePasswordForm
+            // lbUser
+            // 
+            this.lbUser.AutoSize = true;
+            this.lbUser.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbUser.Location = new System.Drawing.Point(38, 53);
+            this.lbUser.Name = "lbUser";
+            this.lbUser.Size = new System.Drawing.Size(234, 41);
+            this.lbUser.TabIndex = 14;
+            this.lbUser.Text = "Tên đăng nhập:";
+            // 
+            // txtUser
+            // 
+            this.txtUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUser.Location = new System.Drawing.Point(325, 46);
+            this.txtUser.Name = "txtUser";
+            this.txtUser.Size = new System.Drawing.Size(662, 48);
+            this.txtUser.TabIndex = 15;
+            // 
+            // frm_chg_pwd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 458);
+            this.ClientSize = new System.Drawing.Size(1022, 537);
+            this.Controls.Add(this.txtUser);
+            this.Controls.Add(this.lbUser);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.txtConfirmPass);
             this.Controls.Add(this.label2);
@@ -128,7 +150,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCurrentPass);
             this.Controls.Add(this.lblPassword);
-            this.Name = "ChangePasswordForm";
+            this.Name = "frm_chg_pwd";
             this.Text = "Change Password";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -145,5 +167,7 @@ namespace WindowsFormsApp_Pharmacy_Management
         private System.Windows.Forms.TextBox txtConfirmPass;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label lbUser;
+        private System.Windows.Forms.TextBox txtUser;
     }
 }

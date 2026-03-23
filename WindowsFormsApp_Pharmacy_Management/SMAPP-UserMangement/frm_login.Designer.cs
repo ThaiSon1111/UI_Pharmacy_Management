@@ -35,6 +35,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btn_login = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.lb_chg_pass = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblUsername
@@ -97,6 +98,18 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // lb_chg_pass
+            // 
+            this.lb_chg_pass.AutoSize = true;
+            this.lb_chg_pass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_chg_pass.ForeColor = System.Drawing.Color.Red;
+            this.lb_chg_pass.Location = new System.Drawing.Point(789, 200);
+            this.lb_chg_pass.Name = "lb_chg_pass";
+            this.lb_chg_pass.Size = new System.Drawing.Size(174, 29);
+            this.lb_chg_pass.TabIndex = 6;
+            this.lb_chg_pass.Text = "Quên mật khẩu";
+            this.lb_chg_pass.Click += new System.EventHandler(this.lb_chg_pass_Click);
+            // 
             // frm_login
             // 
             this.AcceptButton = this.btn_login;
@@ -105,6 +118,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.CancelButton = this.btnExit;
             this.ClientSize = new System.Drawing.Size(1002, 432);
+            this.Controls.Add(this.lb_chg_pass);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btn_login);
             this.Controls.Add(this.txtPassword);
@@ -129,5 +143,6 @@ namespace WindowsFormsApp_Pharmacy_Management
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Button btn_login;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Label lb_chg_pass;
     }
 }

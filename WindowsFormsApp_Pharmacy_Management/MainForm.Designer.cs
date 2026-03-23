@@ -41,6 +41,9 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.quảnLýKhoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.báoCáoTàiChínhToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trợGiúpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.đơnHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nhậpKhoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +60,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.trợGiúpToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(1628, 33);
+            this.menuStrip2.Size = new System.Drawing.Size(2442, 54);
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -117,9 +120,14 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             // tsmi_SalesManagement
             // 
+            this.tsmi_SalesManagement.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sanToolStripMenuItem,
+            this.đơnHàngToolStripMenuItem,
+            this.nhậpKhoToolStripMenuItem});
             this.tsmi_SalesManagement.Name = "tsmi_SalesManagement";
-            this.tsmi_SalesManagement.Size = new System.Drawing.Size(174, 29);
+            this.tsmi_SalesManagement.Size = new System.Drawing.Size(174, 48);
             this.tsmi_SalesManagement.Text = "Quản Lý Bán Hàng";
+            this.tsmi_SalesManagement.Click += new System.EventHandler(this.tsmi_SalesManagement_Click);
             // 
             // quảnLýKhoToolStripMenuItem
             // 
@@ -138,6 +146,24 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.trợGiúpToolStripMenuItem.Name = "trợGiúpToolStripMenuItem";
             this.trợGiúpToolStripMenuItem.Size = new System.Drawing.Size(94, 29);
             this.trợGiúpToolStripMenuItem.Text = "Trợ Giúp";
+            // 
+            // sanToolStripMenuItem
+            // 
+            this.sanToolStripMenuItem.Name = "sanToolStripMenuItem";
+            this.sanToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.sanToolStripMenuItem.Text = "Sản phẩm";
+            // 
+            // đơnHàngToolStripMenuItem
+            // 
+            this.đơnHàngToolStripMenuItem.Name = "đơnHàngToolStripMenuItem";
+            this.đơnHàngToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.đơnHàngToolStripMenuItem.Text = "Đơn hàng";
+            // 
+            // nhậpKhoToolStripMenuItem
+            // 
+            this.nhậpKhoToolStripMenuItem.Name = "nhậpKhoToolStripMenuItem";
+            this.nhậpKhoToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.nhậpKhoToolStripMenuItem.Text = "Nhập kho";
             // 
             // MainForm
             // 
@@ -168,6 +194,9 @@ namespace WindowsFormsApp_Pharmacy_Management
         private System.Windows.Forms.ToolStripMenuItem tsmi_System_ChangePassword;
         private System.Windows.Forms.ToolStripMenuItem tsmi_System_ActInfo;
         private System.Windows.Forms.ToolStripMenuItem tsmi_System_Exit;
+        private System.Windows.Forms.ToolStripMenuItem sanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem đơnHàngToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nhậpKhoToolStripMenuItem;
     }
 }
 

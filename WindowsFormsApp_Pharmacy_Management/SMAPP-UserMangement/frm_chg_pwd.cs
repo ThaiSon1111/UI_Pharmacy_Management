@@ -22,6 +22,7 @@ namespace WindowsFormsApp_Pharmacy_Management
         public frm_chg_pwd()
         {
             InitializeComponent();
+            txtUser.Text = SessionManager.LoggedInUsername;
         }
 
         private async void btnConfirm_Click(object sender, EventArgs e)
@@ -32,11 +33,19 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 1. Kiểm tra username có hợp lệ không
             if (string.IsNullOrEmpty(username))
             {
-                MessageBox.Show("Phiên đăng nhập đã hết hạn hoặc không hợp lệ. Vui lòng đăng nhập lại.", "Lỗi Phiên", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
-                return;
+                if (string.IsNullOrEmpty(txtUser.Text))
+                {
+                    //MessageBox.Show("Phiên đăng nhập đã hết hạn hoặc không hợp lệ. Vui lòng đăng nhập lại.", "Lỗi Phiên", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Tên đăng nhập hoặc mật khẩu chưa chính xác. Vui lòng nhập lại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //this.Close();
+                    return;
+                }
+                else
+                {
+                    username = txtUser.Text;
+                }    
             }
-
+            MessageBox.Show($"Tên đăng nhập: {username}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
             // 2. Lấy dữ liệu người dùng nhập
             string enteredCurPassword = txtCurrentPass.Text;
             string enteredNewPassword = txtNewPass.Text;

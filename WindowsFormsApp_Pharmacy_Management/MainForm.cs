@@ -90,5 +90,10 @@ namespace WindowsFormsApp_Pharmacy_Management
             SessionManager.ClearUser();
             this.Close();
         }
+
+        private void tsmi_SalesManagement_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
