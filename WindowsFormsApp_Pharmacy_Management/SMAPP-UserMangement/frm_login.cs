@@ -16,6 +16,7 @@ using Newtonsoft.Json.Linq;
 using DevExpress.XtraGrid.Columns; // Cần thiết cho việc truy cập GridColumn
 using DevExpress.XtraGrid.Views.Grid; // Cần thiết cho GridView
 
+using WindowsFormsApp_Pharmacy_Management.SMAPP_ConfigApiFlask;
 namespace WindowsFormsApp_Pharmacy_Management
 {
     public partial class frm_login : Form
@@ -40,7 +41,7 @@ namespace WindowsFormsApp_Pharmacy_Management
 
             // 2. Cấu hình API Request
             // Địa chỉ API Flask của bạn
-            const string apiUrl = "http://127.0.0.1:5000/api/users/login";
+            string apiUrl = SMAPP_ConfigApiFlask.ApiConfig.LoginUrl;
 
             // Tạo chuỗi truy vấn (query string) với các tham số user_id và user_pwd
             string query = $"?user_id={Uri.EscapeDataString(enteredUsername)}&user_pwd={Uri.EscapeDataString(enteredPassword)}";

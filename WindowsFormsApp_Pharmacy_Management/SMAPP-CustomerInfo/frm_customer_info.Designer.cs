@@ -39,6 +39,15 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.label1 = new System.Windows.Forms.Label();
             this.txtSearchUserId = new System.Windows.Forms.TextBox();
             this.gbDetails = new System.Windows.Forms.GroupBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.cmb_ActiveYnDetail = new System.Windows.Forms.ComboBox();
+            this.txt_AccPointsDetail = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txt_TaxNoDetail = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cmb_SexDetail = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.dtp_RegiDtDetail = new System.Windows.Forms.DateTimePicker();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
@@ -46,6 +55,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnAddNew = new System.Windows.Forms.Button();
             this.txt_HomeAddrDetail = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.txt_CustnmDetail = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txt_PhoneDetail = new System.Windows.Forms.TextBox();
@@ -54,16 +64,6 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.label5 = new System.Windows.Forms.Label();
             this.txt_CustnoDetail = new System.Windows.Forms.TextBox();
             this.dgvUsers = new System.Windows.Forms.DataGridView();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cmb_SexDetail = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.txt_TaxNoDetail = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.txt_AccPointsDetail = new System.Windows.Forms.TextBox();
-            this.cmb_ActiveYnDetail = new System.Windows.Forms.ComboBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.gbSearch.SuspendLayout();
             this.gbDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
@@ -94,7 +94,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnReload.Location = new System.Drawing.Point(969, 27);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(115, 29);
-            this.btnReload.TabIndex = 7;
+            this.btnReload.TabIndex = 18;
             this.btnReload.Text = "Tải lại";
             this.btnReload.UseVisualStyleBackColor = true;
             this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
@@ -150,7 +150,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(33, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(177, 30);
+            this.label1.Size = new System.Drawing.Size(118, 20);
             this.label1.TabIndex = 1;
             this.label1.Text = "Mã khách hàng";
             // 
@@ -197,6 +197,82 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.gbDetails.TabStop = false;
             this.gbDetails.Text = "Thông tin chi tiết";
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(1374, 71);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(156, 20);
+            this.label13.TabIndex = 24;
+            this.label13.Text = "Trạng thái hoạt động";
+            // 
+            // cmb_ActiveYnDetail
+            // 
+            this.cmb_ActiveYnDetail.FormattingEnabled = true;
+            this.cmb_ActiveYnDetail.Location = new System.Drawing.Point(1565, 67);
+            this.cmb_ActiveYnDetail.Name = "cmb_ActiveYnDetail";
+            this.cmb_ActiveYnDetail.Size = new System.Drawing.Size(211, 28);
+            this.cmb_ActiveYnDetail.TabIndex = 13;
+            this.cmb_ActiveYnDetail.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            // 
+            // txt_AccPointsDetail
+            // 
+            this.txt_AccPointsDetail.Location = new System.Drawing.Point(722, 63);
+            this.txt_AccPointsDetail.Name = "txt_AccPointsDetail";
+            this.txt_AccPointsDetail.Size = new System.Drawing.Size(178, 26);
+            this.txt_AccPointsDetail.TabIndex = 11;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(617, 66);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(98, 20);
+            this.label12.TabIndex = 21;
+            this.label12.Text = "Điểm tích lũy";
+            // 
+            // txt_TaxNoDetail
+            // 
+            this.txt_TaxNoDetail.Location = new System.Drawing.Point(383, 63);
+            this.txt_TaxNoDetail.Name = "txt_TaxNoDetail";
+            this.txt_TaxNoDetail.Size = new System.Drawing.Size(212, 26);
+            this.txt_TaxNoDetail.TabIndex = 10;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(321, 66);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(42, 20);
+            this.label11.TabIndex = 19;
+            this.label11.Text = "MST";
+            // 
+            // cmb_SexDetail
+            // 
+            this.cmb_SexDetail.FormattingEnabled = true;
+            this.cmb_SexDetail.Location = new System.Drawing.Point(155, 63);
+            this.cmb_SexDetail.Name = "cmb_SexDetail";
+            this.cmb_SexDetail.Size = new System.Drawing.Size(152, 28);
+            this.cmb_SexDetail.TabIndex = 9;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(32, 70);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 20);
+            this.label8.TabIndex = 17;
+            this.label8.Text = "Giới tính";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(32, 34);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(118, 20);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Mã khách hàng";
+            // 
             // dtp_RegiDtDetail
             // 
             this.dtp_RegiDtDetail.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -206,14 +282,14 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.dtp_RegiDtDetail.Location = new System.Drawing.Point(1565, 34);
             this.dtp_RegiDtDetail.Name = "dtp_RegiDtDetail";
             this.dtp_RegiDtDetail.Size = new System.Drawing.Size(211, 26);
-            this.dtp_RegiDtDetail.TabIndex = 10;
+            this.dtp_RegiDtDetail.TabIndex = 8;
             // 
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(397, 121);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(105, 30);
-            this.btnSave.TabIndex = 16;
+            this.btnSave.TabIndex = 17;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -223,7 +299,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnEdit.Location = new System.Drawing.Point(155, 121);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(100, 31);
-            this.btnEdit.TabIndex = 14;
+            this.btnEdit.TabIndex = 15;
             this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -233,7 +309,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnDelete.Location = new System.Drawing.Point(281, 121);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 31);
-            this.btnDelete.TabIndex = 15;
+            this.btnDelete.TabIndex = 16;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -243,7 +319,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnAddNew.Location = new System.Drawing.Point(37, 121);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(100, 31);
-            this.btnAddNew.TabIndex = 13;
+            this.btnAddNew.TabIndex = 14;
             this.btnAddNew.Text = "Thêm mới";
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.button1_Click);
@@ -253,7 +329,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txt_HomeAddrDetail.Location = new System.Drawing.Point(999, 30);
             this.txt_HomeAddrDetail.Name = "txt_HomeAddrDetail";
             this.txt_HomeAddrDetail.Size = new System.Drawing.Size(343, 26);
-            this.txt_HomeAddrDetail.TabIndex = 12;
+            this.txt_HomeAddrDetail.TabIndex = 7;
             // 
             // label10
             // 
@@ -264,12 +340,21 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.label10.TabIndex = 12;
             this.label10.Text = "Địa chỉ";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(1374, 40);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(104, 20);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "Ngày đăng ký";
+            // 
             // txt_CustnmDetail
             // 
             this.txt_CustnmDetail.Location = new System.Drawing.Point(383, 27);
             this.txt_CustnmDetail.Name = "txt_CustnmDetail";
             this.txt_CustnmDetail.Size = new System.Drawing.Size(212, 26);
-            this.txt_CustnmDetail.TabIndex = 8;
+            this.txt_CustnmDetail.TabIndex = 5;
             // 
             // label7
             // 
@@ -285,7 +370,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txt_PhoneDetail.Location = new System.Drawing.Point(722, 27);
             this.txt_PhoneDetail.Name = "txt_PhoneDetail";
             this.txt_PhoneDetail.Size = new System.Drawing.Size(178, 26);
-            this.txt_PhoneDetail.TabIndex = 7;
+            this.txt_PhoneDetail.TabIndex = 6;
             this.txt_PhoneDetail.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label6
@@ -302,7 +387,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txt_EmailDetail.Location = new System.Drawing.Point(999, 64);
             this.txt_EmailDetail.Name = "txt_EmailDetail";
             this.txt_EmailDetail.Size = new System.Drawing.Size(343, 26);
-            this.txt_EmailDetail.TabIndex = 6;
+            this.txt_EmailDetail.TabIndex = 12;
             // 
             // label5
             // 
@@ -335,91 +420,6 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.dgvUsers.Size = new System.Drawing.Size(1782, 491);
             this.dgvUsers.TabIndex = 3;
             this.dgvUsers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellClick);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(32, 34);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(118, 20);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Mã khách hàng";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1374, 40);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(104, 20);
-            this.label9.TabIndex = 10;
-            this.label9.Text = "Ngày đăng ký";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(32, 70);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(101, 30);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "Giới tính";
-            // 
-            // cmb_SexDetail
-            // 
-            this.cmb_SexDetail.FormattingEnabled = true;
-            this.cmb_SexDetail.Location = new System.Drawing.Point(155, 63);
-            this.cmb_SexDetail.Name = "cmb_SexDetail";
-            this.cmb_SexDetail.Size = new System.Drawing.Size(152, 28);
-            this.cmb_SexDetail.TabIndex = 18;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(321, 66);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(63, 30);
-            this.label11.TabIndex = 19;
-            this.label11.Text = "MST";
-            // 
-            // txt_TaxNoDetail
-            // 
-            this.txt_TaxNoDetail.Location = new System.Drawing.Point(383, 63);
-            this.txt_TaxNoDetail.Name = "txt_TaxNoDetail";
-            this.txt_TaxNoDetail.Size = new System.Drawing.Size(212, 26);
-            this.txt_TaxNoDetail.TabIndex = 20;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(617, 66);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(147, 30);
-            this.label12.TabIndex = 21;
-            this.label12.Text = "Điểm tích lũy";
-            // 
-            // txt_AccPointsDetail
-            // 
-            this.txt_AccPointsDetail.Location = new System.Drawing.Point(722, 63);
-            this.txt_AccPointsDetail.Name = "txt_AccPointsDetail";
-            this.txt_AccPointsDetail.Size = new System.Drawing.Size(178, 26);
-            this.txt_AccPointsDetail.TabIndex = 22;
-            // 
-            // cmb_ActiveYnDetail
-            // 
-            this.cmb_ActiveYnDetail.FormattingEnabled = true;
-            this.cmb_ActiveYnDetail.Location = new System.Drawing.Point(1565, 67);
-            this.cmb_ActiveYnDetail.Name = "cmb_ActiveYnDetail";
-            this.cmb_ActiveYnDetail.Size = new System.Drawing.Size(211, 28);
-            this.cmb_ActiveYnDetail.TabIndex = 23;
-            this.cmb_ActiveYnDetail.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(1374, 71);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(156, 20);
-            this.label13.TabIndex = 24;
-            this.label13.Text = "Trạng thái hoạt động";
             // 
             // frm_customer_info
             // 

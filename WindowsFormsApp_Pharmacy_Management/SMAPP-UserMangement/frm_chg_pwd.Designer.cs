@@ -47,7 +47,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtCurrentPass.Location = new System.Drawing.Point(325, 137);
             this.txtCurrentPass.Name = "txtCurrentPass";
             this.txtCurrentPass.Size = new System.Drawing.Size(662, 48);
-            this.txtCurrentPass.TabIndex = 7;
+            this.txtCurrentPass.TabIndex = 2;
             // 
             // lblPassword
             // 
@@ -65,7 +65,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtNewPass.Location = new System.Drawing.Point(325, 237);
             this.txtNewPass.Name = "txtNewPass";
             this.txtNewPass.Size = new System.Drawing.Size(662, 48);
-            this.txtNewPass.TabIndex = 9;
+            this.txtNewPass.TabIndex = 3;
             // 
             // label1
             // 
@@ -83,7 +83,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnConfirm.Location = new System.Drawing.Point(549, 434);
             this.btnConfirm.Name = "btnConfirm";
             this.btnConfirm.Size = new System.Drawing.Size(193, 66);
-            this.btnConfirm.TabIndex = 10;
+            this.btnConfirm.TabIndex = 5;
             this.btnConfirm.Text = "Xác nhận";
             this.btnConfirm.UseVisualStyleBackColor = true;
             this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
@@ -94,7 +94,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtConfirmPass.Location = new System.Drawing.Point(325, 326);
             this.txtConfirmPass.Name = "txtConfirmPass";
             this.txtConfirmPass.Size = new System.Drawing.Size(662, 48);
-            this.txtConfirmPass.TabIndex = 12;
+            this.txtConfirmPass.TabIndex = 4;
             // 
             // label2
             // 
@@ -112,7 +112,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnCancel.Location = new System.Drawing.Point(794, 434);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(193, 66);
-            this.btnCancel.TabIndex = 13;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "Hủy";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -133,7 +133,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtUser.Location = new System.Drawing.Point(325, 46);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(662, 48);
-            this.txtUser.TabIndex = 15;
+            this.txtUser.TabIndex = 1;
             // 
             // frm_chg_pwd
             // 

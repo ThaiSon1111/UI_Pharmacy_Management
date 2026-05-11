@@ -39,6 +39,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.label1 = new System.Windows.Forms.Label();
             this.txtSearchUserId = new System.Windows.Forms.TextBox();
             this.gbDetails = new System.Windows.Forms.GroupBox();
+            this.dtp_IdDtDetail = new System.Windows.Forms.DateTimePicker();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
@@ -59,7 +60,6 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtUserIdDetail = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvUsers = new System.Windows.Forms.DataGridView();
-            this.dtp_IdDtDetail = new System.Windows.Forms.DateTimePicker();
             this.gbSearch.SuspendLayout();
             this.gbDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
@@ -182,13 +182,25 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.gbDetails.TabIndex = 1;
             this.gbDetails.TabStop = false;
             this.gbDetails.Text = "Thông tin chi tiết";
+            this.gbDetails.Enter += new System.EventHandler(this.gbDetails_Enter);
+            // 
+            // dtp_IdDtDetail
+            // 
+            this.dtp_IdDtDetail.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtp_IdDtDetail.CustomFormat = "dd/MM/yyyy";
+            this.dtp_IdDtDetail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtp_IdDtDetail.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtp_IdDtDetail.Location = new System.Drawing.Point(683, 74);
+            this.dtp_IdDtDetail.Name = "dtp_IdDtDetail";
+            this.dtp_IdDtDetail.Size = new System.Drawing.Size(211, 26);
+            this.dtp_IdDtDetail.TabIndex = 10;
             // 
             // btnSave
             // 
             this.btnSave.Location = new System.Drawing.Point(397, 121);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(105, 30);
-            this.btnSave.TabIndex = 16;
+            this.btnSave.TabIndex = 15;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -198,7 +210,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnEdit.Location = new System.Drawing.Point(155, 121);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(100, 31);
-            this.btnEdit.TabIndex = 14;
+            this.btnEdit.TabIndex = 13;
             this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -208,7 +220,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnDelete.Location = new System.Drawing.Point(281, 121);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 31);
-            this.btnDelete.TabIndex = 15;
+            this.btnDelete.TabIndex = 14;
             this.btnDelete.Text = "Xóa";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -218,7 +230,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnAddNew.Location = new System.Drawing.Point(37, 121);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(100, 31);
-            this.btnAddNew.TabIndex = 13;
+            this.btnAddNew.TabIndex = 12;
             this.btnAddNew.Text = "Thêm mới";
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.button1_Click);
@@ -244,7 +256,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtIdOrgDetail.Location = new System.Drawing.Point(999, 69);
             this.txtIdOrgDetail.Name = "txtIdOrgDetail";
             this.txtIdOrgDetail.Size = new System.Drawing.Size(272, 26);
-            this.txtIdOrgDetail.TabIndex = 12;
+            this.txtIdOrgDetail.TabIndex = 11;
             // 
             // label10
             // 
@@ -360,17 +372,6 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.dgvUsers.Size = new System.Drawing.Size(1782, 491);
             this.dgvUsers.TabIndex = 3;
             this.dgvUsers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellClick);
-            // 
-            // dtp_IdDtDetail
-            // 
-            this.dtp_IdDtDetail.CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtp_IdDtDetail.CustomFormat = "dd/MM/yyyy";
-            this.dtp_IdDtDetail.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtp_IdDtDetail.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_IdDtDetail.Location = new System.Drawing.Point(683, 74);
-            this.dtp_IdDtDetail.Name = "dtp_IdDtDetail";
-            this.dtp_IdDtDetail.Size = new System.Drawing.Size(211, 26);
-            this.dtp_IdDtDetail.TabIndex = 10;
             // 
             // frm_user_info
             // 

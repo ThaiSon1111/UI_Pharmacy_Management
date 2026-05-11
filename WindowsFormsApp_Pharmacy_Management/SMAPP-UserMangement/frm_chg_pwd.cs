@@ -15,6 +15,7 @@ using Newtonsoft.Json.Linq;
 using DevExpress.XtraGrid.Columns; // Cần thiết cho việc truy cập GridColumn
 using DevExpress.XtraGrid.Views.Grid; // Cần thiết cho GridView
 
+using WindowsFormsApp_Pharmacy_Management.SMAPP_ConfigApiFlask;
 namespace WindowsFormsApp_Pharmacy_Management
 {
     public partial class frm_chg_pwd : Form
@@ -74,7 +75,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             }
 
             // 5. Cấu hình API Request
-            const string apiUrl = "http://127.0.0.1:5000/api/users/change_password"; // Địa chỉ API Flask của bạn
+            string apiUrl = SMAPP_ConfigApiFlask.ApiConfig.ChangePassUrl; // Địa chỉ API Flask của bạn
 
             // Chuẩn bị dữ liệu JSON payload
             var passwordData = new

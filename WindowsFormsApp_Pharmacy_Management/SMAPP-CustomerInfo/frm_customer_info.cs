@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 //using DevExpress.XtraGrid.Views.Grid; // Các thư viện DevExpress đã bị loại bỏ
 using System.Globalization; // Dùng khi có sử dụng CultureInfo
 
+using WindowsFormsApp_Pharmacy_Management.SMAPP_ConfigApiFlask;
 namespace WindowsFormsApp_Pharmacy_Management
 {
     // Khai báo Enum để định nghĩa các trạng thái
@@ -113,7 +114,7 @@ namespace WindowsFormsApp_Pharmacy_Management
         private async Task ReloadDataAsync()
         {
             // Lấy logic từ hàm btnSearch_Click và chỉnh sửa lại
-            const string apiUrl = "http://127.0.0.1:5000/api/custinfo/search";
+            string apiUrl = SMAPP_ConfigApiFlask.ApiConfig.CustomerSearchUrl;
 
             // Lấy giá trị tìm kiếm (Sử dụng các ô tìm kiếm hiện tại)
             string cust_no = Uri.EscapeDataString(txtSearchUserId.Text.Trim());
@@ -243,7 +244,7 @@ namespace WindowsFormsApp_Pharmacy_Management
                 try
                 {
                     // Endpoint API IUD chung
-                    string url = "http://localhost:5000/api/custinfo/iud";
+                    string url = SMAPP_ConfigApiFlask.ApiConfig.CustomerIudUrl;
 
                     // Luôn dùng POST (vì là IUD)
                     HttpResponseMessage response = await client.PostAsync(url, content);
@@ -287,7 +288,7 @@ namespace WindowsFormsApp_Pharmacy_Management
         {
             //Disnable các trường detail info
             DisableDetailInfo();
-            const string apiUrl = "http://127.0.0.1:5000/api/custinfo/search";
+            string apiUrl = SMAPP_ConfigApiFlask.ApiConfig.CustomerSearchUrl;
             Console.WriteLine("Test");
             // Lấy giá trị tìm kiếm
             string cust_no = Uri.EscapeDataString(txtSearchUserId.Text.Trim());

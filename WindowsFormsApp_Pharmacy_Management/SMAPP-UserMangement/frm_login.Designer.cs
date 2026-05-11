@@ -29,6 +29,7 @@ namespace WindowsFormsApp_Pharmacy_Management
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_login));
             this.lblUsername = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
@@ -73,7 +74,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(662, 48);
-            this.txtPassword.TabIndex = 3;
+            this.txtPassword.TabIndex = 2;
             // 
             // btn_login
             // 
@@ -81,7 +82,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btn_login.Location = new System.Drawing.Point(132, 268);
             this.btn_login.Name = "btn_login";
             this.btn_login.Size = new System.Drawing.Size(292, 105);
-            this.btn_login.TabIndex = 4;
+            this.btn_login.TabIndex = 3;
             this.btn_login.Text = "Đăng nhập";
             this.btn_login.UseVisualStyleBackColor = true;
             this.btn_login.Click += new System.EventHandler(this.button1_Click);
@@ -93,7 +94,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnExit.Location = new System.Drawing.Point(544, 268);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(292, 105);
-            this.btnExit.TabIndex = 5;
+            this.btnExit.TabIndex = 4;
             this.btnExit.Text = "Thoát";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
@@ -106,7 +107,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.lb_chg_pass.Location = new System.Drawing.Point(789, 200);
             this.lb_chg_pass.Name = "lb_chg_pass";
             this.lb_chg_pass.Size = new System.Drawing.Size(174, 29);
-            this.lb_chg_pass.TabIndex = 6;
+            this.lb_chg_pass.TabIndex = 5;
             this.lb_chg_pass.Text = "Quên mật khẩu";
             this.lb_chg_pass.Click += new System.EventHandler(this.lb_chg_pass_Click);
             // 
@@ -126,6 +127,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.lblUsername);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";

@@ -1,0 +1,7 @@
+<FileList>
+  <File Reference="DevExpress.DataAccess.v25.2.UI.dll">
+    <ToolboxItems UIFramework="WinForms" VSCategory="DX.25.2: Data &amp; Analytics">
+      <Item Type="DevExpress.DataAccess.UI.FilterEditorControl" />
+    </ToolboxItems>
+  </File>
+</FileList>
