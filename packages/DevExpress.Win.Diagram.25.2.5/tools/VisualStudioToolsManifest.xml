@@ -1,0 +1,8 @@
+<FileList>
+  <File Reference="DevExpress.XtraDiagram.v25.2.dll">
+    <ToolboxItems UIFramework="WinForms" VSCategory="DX.25.2: Data &amp; Analytics">
+      <Item Type="DevExpress.XtraDiagram.DiagramControl" />
+      <Item Type="DevExpress.XtraDiagram.DiagramPanAndZoomControl" />
+    </ToolboxItems>
+  </File>
+</FileList>

@@ -1,0 +1,7 @@
+<FileList>
+  <File Reference="DevExpress.XtraReports.v25.2.Extensions.dll">
+    <ToolboxItems UIFramework="WinForms" VSCategory="DX.25.2: Components">
+      <Item Type="DevExpress.XtraReports.ReportGeneration.ReportGenerator" />
+    </ToolboxItems>
+  </File>
+</FileList>
