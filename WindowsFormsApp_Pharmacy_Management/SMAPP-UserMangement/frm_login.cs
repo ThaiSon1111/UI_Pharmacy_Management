@@ -137,5 +137,20 @@ namespace WindowsFormsApp_Pharmacy_Management
             frm_chg_pwd chg_pass = new frm_chg_pwd();
             chg_pass.Show();
         }
+
+        private void lblUsername_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
