@@ -48,10 +48,10 @@ namespace WindowsFormsApp_Pharmacy_Management
             // lblUsername
             // 
             this.lblUsername.AutoSize = true;
-            this.lblUsername.Font = new System.Drawing.Font("Viner Hand ITC", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsername.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUsername.Location = new System.Drawing.Point(43, 327);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(269, 52);
+            this.lblUsername.Size = new System.Drawing.Size(219, 38);
             this.lblUsername.TabIndex = 0;
             this.lblUsername.Text = "Tên đăng nhập:";
             this.lblUsername.Click += new System.EventHandler(this.lblUsername_Click);
@@ -59,19 +59,20 @@ namespace WindowsFormsApp_Pharmacy_Management
             // lblPassword
             // 
             this.lblPassword.AutoSize = true;
-            this.lblPassword.Font = new System.Drawing.Font("Viner Hand ITC", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPassword.Location = new System.Drawing.Point(43, 475);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(196, 52);
+            this.lblPassword.Size = new System.Drawing.Size(151, 38);
             this.lblPassword.TabIndex = 2;
             this.lblPassword.Text = "Mật khẩu:";
             // 
             // txtUsername
             // 
-            this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtUsername.ForeColor = System.Drawing.SystemColors.InfoText;
             this.txtUsername.Location = new System.Drawing.Point(104, 384);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(580, 48);
+            this.txtUsername.Size = new System.Drawing.Size(347, 50);
             this.txtUsername.TabIndex = 1;
             this.txtUsername.TextChanged += new System.EventHandler(this.txtUsername_TextChanged);
             // 
@@ -81,15 +82,15 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtPassword.Location = new System.Drawing.Point(104, 532);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
-            this.txtPassword.Size = new System.Drawing.Size(580, 48);
+            this.txtPassword.Size = new System.Drawing.Size(347, 48);
             this.txtPassword.TabIndex = 2;
             // 
             // btn_login
             // 
-            this.btn_login.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_login.Location = new System.Drawing.Point(52, 680);
+            this.btn_login.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_login.Location = new System.Drawing.Point(38, 680);
             this.btn_login.Name = "btn_login";
-            this.btn_login.Size = new System.Drawing.Size(308, 59);
+            this.btn_login.Size = new System.Drawing.Size(157, 41);
             this.btn_login.TabIndex = 3;
             this.btn_login.Text = "Đăng nhập";
             this.btn_login.UseVisualStyleBackColor = true;
@@ -98,10 +99,10 @@ namespace WindowsFormsApp_Pharmacy_Management
             // btnExit
             // 
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnExit.Font = new System.Drawing.Font("Times New Roman", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(376, 680);
+            this.btnExit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Location = new System.Drawing.Point(279, 680);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(308, 57);
+            this.btnExit.Size = new System.Drawing.Size(157, 41);
             this.btnExit.TabIndex = 4;
             this.btnExit.Text = "Thoát";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -110,11 +111,11 @@ namespace WindowsFormsApp_Pharmacy_Management
             // lb_chg_pass
             // 
             this.lb_chg_pass.AutoSize = true;
-            this.lb_chg_pass.Font = new System.Drawing.Font("Viner Hand ITC", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_chg_pass.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_chg_pass.ForeColor = System.Drawing.Color.Black;
-            this.lb_chg_pass.Location = new System.Drawing.Point(483, 609);
+            this.lb_chg_pass.Location = new System.Drawing.Point(273, 608);
             this.lb_chg_pass.Name = "lb_chg_pass";
-            this.lb_chg_pass.Size = new System.Drawing.Size(201, 39);
+            this.lb_chg_pass.Size = new System.Drawing.Size(178, 32);
             this.lb_chg_pass.TabIndex = 5;
             this.lb_chg_pass.Text = "Quên mật khẩu";
             this.lb_chg_pass.Click += new System.EventHandler(this.lb_chg_pass_Click);
@@ -143,9 +144,9 @@ namespace WindowsFormsApp_Pharmacy_Management
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(141, -4);
+            this.pictureBox3.Location = new System.Drawing.Point(5, 10);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(440, 314);
+            this.pictureBox3.Size = new System.Drawing.Size(481, 314);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 8;
             this.pictureBox3.TabStop = false;
@@ -157,7 +158,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(720, 795);
+            this.ClientSize = new System.Drawing.Size(492, 750);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
