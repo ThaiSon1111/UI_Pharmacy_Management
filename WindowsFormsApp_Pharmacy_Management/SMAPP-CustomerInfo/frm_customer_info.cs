@@ -15,6 +15,7 @@ using Newtonsoft.Json.Linq;
 using System.Globalization; // Dùng khi có sử dụng CultureInfo
 
 using WindowsFormsApp_Pharmacy_Management.SMAPP_ConfigApiFlask;
+using WindowsFormsApp_Pharmacy_Management.SMAPP_FunctionCommon; // Thêm dòng này để include thư mục common
 namespace WindowsFormsApp_Pharmacy_Management
 {
     // Khai báo Enum để định nghĩa các trạng thái
@@ -212,6 +213,14 @@ namespace WindowsFormsApp_Pharmacy_Management
             dgvUsers.ReadOnly = true;
             dgvUsers.AllowUserToAddRows = false;
             dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            // Đặt độ rộng cho cột chứa số thứ tự vừa đủ nhìn
+            dgvUsers.RowHeadersWidth = 50;
+
+            // =========================================================================
+            // ĐĂNG KÝ SỰ KIỆN TỪ CLASS COMMON DÙNG CHUNG
+            // =========================================================================
+            dgvUsers.RowPostPaint += Fn_DataGridViewHelper.DrawRowNumbers; // Gọi hàm vẽ số thứ tự
+            dgvUsers.CellPainting += Fn_DataGridViewHelper.DrawHeaderSTT;  // Gọi hàm vẽ chữ STT trên header
         }
         // Hàm để tạo request API đến service
         private async Task CallPythonServiceIUD(FormMode_CusInfo mode, string cust_no, string cust_nm, string mobi_phone, string email, string sex, string home_addr, string tax_no, string acc_points)
@@ -567,5 +576,6 @@ namespace WindowsFormsApp_Pharmacy_Management
         {
 
         }
+        
     }
 }

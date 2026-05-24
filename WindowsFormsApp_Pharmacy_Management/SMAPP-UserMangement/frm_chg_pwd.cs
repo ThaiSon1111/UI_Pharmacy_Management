@@ -147,5 +147,20 @@ namespace WindowsFormsApp_Pharmacy_Management
         {
             this.Close(); // Đóng Form Đổi Mật khẩu
         }
+
+        private void txtNewPass_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCurrentPass_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

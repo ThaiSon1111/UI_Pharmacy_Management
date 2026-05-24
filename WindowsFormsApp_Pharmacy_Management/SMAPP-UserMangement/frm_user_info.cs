@@ -15,6 +15,7 @@ using Newtonsoft.Json.Linq;
 using System.Globalization; // Dùng khi có sử dụng CultureInfo
 
 using WindowsFormsApp_Pharmacy_Management.SMAPP_ConfigApiFlask;
+using WindowsFormsApp_Pharmacy_Management.SMAPP_FunctionCommon; // Thêm dòng này để include thư mục common
 namespace WindowsFormsApp_Pharmacy_Management
 {
     // Khai báo Enum để định nghĩa các trạng thái
@@ -196,7 +197,7 @@ namespace WindowsFormsApp_Pharmacy_Management
                 gridColumn.HeaderText = col.HeaderText;
                 gridColumn.Name = col.DataField;
 
-                // --- KHẮC PHỤC LỖI HIỂN THỊ ĐỊNH DẠNG NGÀY TRÊN GRID ---
+                //// --- KHẮC PHỤC LỖI HIỂN THỊ ĐỊNH DẠNG NGÀY TRÊN GRID ---
                 if (col.DataField == "ID_DT" || col.DataField == "WORK_DT" || col.DataField == "UPD_DT")
                 {
                     // Định dạng hiển thị dd/MM/yyyy trên DataGridView
@@ -211,6 +212,12 @@ namespace WindowsFormsApp_Pharmacy_Management
             dgvUsers.ReadOnly = true;
             dgvUsers.AllowUserToAddRows = false;
             dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            // =========================================================================
+            // ĐĂNG KÝ SỰ KIỆN TỪ CLASS COMMON DÙNG CHUNG
+            // =========================================================================
+            dgvUsers.RowPostPaint += Fn_DataGridViewHelper.DrawRowNumbers; // Gọi hàm vẽ số thứ tự
+            dgvUsers.CellPainting += Fn_DataGridViewHelper.DrawHeaderSTT;  // Gọi hàm vẽ chữ STT trên header
         }
         // Hàm để tạo request API đến service
         private async Task CallPythonServiceIUD(FormMode mode, string userName, string email, string id_no, string id_dt, string id_org, string userid, string pwd, string mobi_phone)

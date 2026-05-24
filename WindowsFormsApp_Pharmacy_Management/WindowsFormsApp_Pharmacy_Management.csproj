@@ -254,6 +254,7 @@
     <Compile Include="SMAPP-CustomerInfo\frm_customer_info.Designer.cs">
       <DependentUpon>frm_customer_info.cs</DependentUpon>
     </Compile>
+    <Compile Include="SMAPP-FunctionCommon\Fn_DataGridViewHelper.cs" />
     <Compile Include="SMAPP-UserMangement\frm_chg_pwd.cs">
       <SubType>Form</SubType>
     </Compile>
