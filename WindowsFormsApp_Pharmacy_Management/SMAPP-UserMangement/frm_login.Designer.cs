@@ -49,6 +49,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             this.lblUsername.AutoSize = true;
             this.lblUsername.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsername.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblUsername.Location = new System.Drawing.Point(43, 327);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(219, 38);
@@ -60,6 +61,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             this.lblPassword.AutoSize = true;
             this.lblPassword.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lblPassword.Location = new System.Drawing.Point(43, 475);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(151, 38);
@@ -87,32 +89,36 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             // btn_login
             // 
+            this.btn_login.BackColor = System.Drawing.Color.RoyalBlue;
             this.btn_login.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_login.ForeColor = System.Drawing.Color.White;
             this.btn_login.Location = new System.Drawing.Point(38, 680);
             this.btn_login.Name = "btn_login";
-            this.btn_login.Size = new System.Drawing.Size(157, 41);
+            this.btn_login.Size = new System.Drawing.Size(157, 58);
             this.btn_login.TabIndex = 3;
             this.btn_login.Text = "Đăng nhập";
-            this.btn_login.UseVisualStyleBackColor = true;
+            this.btn_login.UseVisualStyleBackColor = false;
             this.btn_login.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnExit
             // 
+            this.btnExit.BackColor = System.Drawing.Color.RoyalBlue;
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnExit.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.Color.White;
             this.btnExit.Location = new System.Drawing.Point(279, 680);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(157, 41);
+            this.btnExit.Size = new System.Drawing.Size(157, 58);
             this.btnExit.TabIndex = 4;
             this.btnExit.Text = "Thoát";
-            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // lb_chg_pass
             // 
             this.lb_chg_pass.AutoSize = true;
             this.lb_chg_pass.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_chg_pass.ForeColor = System.Drawing.Color.Black;
+            this.lb_chg_pass.ForeColor = System.Drawing.Color.MidnightBlue;
             this.lb_chg_pass.Location = new System.Drawing.Point(273, 608);
             this.lb_chg_pass.Name = "lb_chg_pass";
             this.lb_chg_pass.Size = new System.Drawing.Size(178, 32);
@@ -158,7 +164,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnExit;
-            this.ClientSize = new System.Drawing.Size(492, 750);
+            this.ClientSize = new System.Drawing.Size(492, 813);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -171,6 +177,8 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.Controls.Add(this.lblUsername);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frm_login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";

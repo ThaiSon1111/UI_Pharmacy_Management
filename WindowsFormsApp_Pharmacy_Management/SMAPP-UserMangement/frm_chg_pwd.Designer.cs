@@ -57,6 +57,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtCurrentPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCurrentPass.Location = new System.Drawing.Point(17, 281);
             this.txtCurrentPass.Name = "txtCurrentPass";
+            this.txtCurrentPass.PasswordChar = '*';
             this.txtCurrentPass.Size = new System.Drawing.Size(525, 48);
             this.txtCurrentPass.TabIndex = 2;
             this.txtCurrentPass.TextChanged += new System.EventHandler(this.txtCurrentPass_TextChanged);
@@ -77,6 +78,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtNewPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNewPass.Location = new System.Drawing.Point(18, 401);
             this.txtNewPass.Name = "txtNewPass";
+            this.txtNewPass.PasswordChar = '*';
             this.txtNewPass.Size = new System.Drawing.Size(524, 48);
             this.txtNewPass.TabIndex = 3;
             this.txtNewPass.TextChanged += new System.EventHandler(this.txtNewPass_TextChanged);
@@ -111,6 +113,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtConfirmPass.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtConfirmPass.Location = new System.Drawing.Point(17, 516);
             this.txtConfirmPass.Name = "txtConfirmPass";
+            this.txtConfirmPass.PasswordChar = '*';
             this.txtConfirmPass.Size = new System.Drawing.Size(525, 48);
             this.txtConfirmPass.TabIndex = 4;
             // 
@@ -227,6 +230,9 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCurrentPass);
             this.Controls.Add(this.lblPassword);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frm_chg_pwd";
             this.Text = "Change Password";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
