@@ -31,5 +31,8 @@ namespace WindowsFormsApp_Pharmacy_Management.SMAPP_ConfigApiFlask
         // --- Module Bán hàng ---
         public static string SalesSearchUrl => $"{BaseUrl}/api/sales/search";
         public static string SalesCreateUrl => $"{BaseUrl}/api/sales/create";
+
+        // --- Module Common ---
+        public static string getheaderreport => $"{BaseUrl}/api/common/getheaderreport";
     }
 }

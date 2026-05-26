@@ -10,12 +10,11 @@ using System.Windows.Forms;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-//using DevExpress.XtraGrid.Columns; // Các thư viện DevExpress đã bị loại bỏ
-//using DevExpress.XtraGrid.Views.Grid; // Các thư viện DevExpress đã bị loại bỏ
-using System.Globalization; // Dùng khi có sử dụng CultureInfo
+using System.Globalization;
 
 using WindowsFormsApp_Pharmacy_Management.SMAPP_ConfigApiFlask;
-using WindowsFormsApp_Pharmacy_Management.SMAPP_FunctionCommon; // Thêm dòng này để include thư mục common
+using WindowsFormsApp_Pharmacy_Management.SMAPP_FunctionCommon;
+
 namespace WindowsFormsApp_Pharmacy_Management
 {
     // Khai báo Enum để định nghĩa các trạng thái
@@ -29,61 +28,52 @@ namespace WindowsFormsApp_Pharmacy_Management
 
     public partial class frm_user_info : Form
     {
-        // 2. Khai báo biến lưu trữ trạng thái hiện tại (Form State)
+        // Khai báo biến lưu trữ trạng thái hiện tại (Form State)
         private FormMode currentMode = FormMode.None;
-        // Mã báo cáo/màn hình được sử dụng để lấy cấu hình
+
+        // Mã báo cáo/màn hình được sử dụng để lấy cấu hình từ Backend
         private const string REPORT_CODE = "0100";
+
         // Cần thêm hàm ánh xạ (Helper)
         private string GetProcTypeFromMode(FormMode mode)
         {
             // Ánh xạ FormMode sang PROC_TP string (01, 02, 03)
-            return ((int)mode).ToString("D2"); // D2 format 1 -> "01", 2 -> "02"
+            return ((int)mode).ToString("D2");
         }
-        // Khai báo Static Schema (ĐỒNG BỘ VỚI USER_COLUMNS_SCHEMA TRONG PYTHON)
-        private static readonly List<ColumnConfig> GridSchema = new List<ColumnConfig>
-        {
-            new ColumnConfig("USER_ID", "Tài Khoản"),
-            new ColumnConfig("USERNAME", "Họ Tên"),
-            new ColumnConfig("MOBI_PHONE", "Số ĐT"),
-            new ColumnConfig("EMAIL", "Email"),
-            new ColumnConfig("ID_NO", "CMND/CCCD"),
-            new ColumnConfig("ID_DT", "Ngày Cấp CMND"),
-            new ColumnConfig("ID_ORG", "Nơi Cấp CMND"),
-            new ColumnConfig("WORK_DT", "Ngày Vào Làm"),
-            new ColumnConfig("UPD_DT", "Cập Nhật Cuối"),
-            // Bỏ PWD nếu không muốn hiển thị trên lưới
-            // new ColumnConfig("PWD", "Mật Khẩu (Hash)"), 
-        };
+
         public frm_user_info()
         {
             InitializeComponent();
             SetupGridColumns(); // Bắt buộc gọi trước khi gán DataSource
             DisableDetailInfo();
         }
+
         // Disable các trường detail
         private void DisableDetailInfo()
         {
             txtUserIdDetail.Enabled = false;
             txtIdOrgDetail.Enabled = false;
-            dtp_IdDtDetail.Enabled = false; // Áp dụng cho DateTimePicker/TextBox
+            dtp_IdDtDetail.Enabled = false;
             txtIdNoDetail.Enabled = false;
             txtUsernameDetail.Enabled = false;
             txtPhoneDetail.Enabled = false;
             txtEmailDetail.Enabled = false;
             txtIdPwdDetail.Enabled = false;
         }
+
         // Enable các trường detail
         private void EnableDetailInfo()
         {
             txtUserIdDetail.Enabled = true;
             txtIdOrgDetail.Enabled = true;
-            dtp_IdDtDetail.Enabled = true; // Áp dụng cho DateTimePicker/TextBox
+            dtp_IdDtDetail.Enabled = true;
             txtIdNoDetail.Enabled = true;
             txtUsernameDetail.Enabled = true;
             txtPhoneDetail.Enabled = true;
             txtEmailDetail.Enabled = true;
             txtIdPwdDetail.Enabled = true;
         }
+
         private void ClearDetailInfo()
         {
             txtUserIdDetail.Text = "";
@@ -91,7 +81,6 @@ namespace WindowsFormsApp_Pharmacy_Management
             // Xử lý riêng cho DateTimePicker (hoặc để trống nếu là TextBox)
             if (dtp_IdDtDetail is DateTimePicker dtp)
             {
-                // Nếu là DateTimePicker, reset về ngày hôm nay hoặc ngày tối thiểu
                 dtp.Value = DateTime.Now;
             }
             else
@@ -104,10 +93,10 @@ namespace WindowsFormsApp_Pharmacy_Management
             txtEmailDetail.Text = "";
             txtIdPwdDetail.Text = "";
         }
+
         // Tương đương button tải lại
         private async Task ReloadDataAsync()
         {
-            // Lấy logic từ hàm btnSearch_Click và chỉnh sửa lại
             string apiUrl = SMAPP_ConfigApiFlask.ApiConfig.UserInfoUrl;
 
             // Lấy giá trị tìm kiếm (Sử dụng các ô tìm kiếm hiện tại)
@@ -133,15 +122,14 @@ namespace WindowsFormsApp_Pharmacy_Management
 
                         dgvUsers.DataSource = usersArray.ToObject<DataTable>();
                     }
-                    // Không cần MessageBox.Show khi reload
                 }
                 catch (Exception ex)
                 {
-                    // Có thể ghi log nếu lỗi
                     Console.WriteLine($"Lỗi khi tải lại dữ liệu: {ex.Message}");
                 }
             }
         }
+
         private string GetCellValue(DataGridViewRow row, string columnName)
         {
             // Kiểm tra xem ô có tồn tại và có giá trị không
@@ -152,23 +140,8 @@ namespace WindowsFormsApp_Pharmacy_Management
             return string.Empty;
         }
 
-        public class ColumnConfig
-        {
-            // Tên cột trong JSON (Database)
-            public string DataField { get; set; }
-            // Tên hiển thị trên Grid
-            public string HeaderText { get; set; }
-            // Định nghĩa này giúp C# hiểu thứ tự và tên cột
-            public ColumnConfig(string dataField, string headerText)
-            {
-                DataField = dataField;
-                HeaderText = headerText;
-            }
-        }
-
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void UserInfoForm_Load(object sender, EventArgs e)
@@ -182,43 +155,25 @@ namespace WindowsFormsApp_Pharmacy_Management
                 btnSearch_Click(sender, e);
             }
         }
-        //Hàm để tự động tạo cột, đặt tên và đặt thứ tự theo GridSchema:
+
+        // Hàm để tự động tạo cột, đặt tên và cấu hình Grid
         private void SetupGridColumns()
         {
-            // Giả sử tên control là dgvUsers hoặc DataGridView1
             dgvUsers.Columns.Clear();
 
-            foreach (var col in GridSchema)
-            {
-                DataGridViewTextBoxColumn gridColumn = new DataGridViewTextBoxColumn();
-                // Ánh xạ tên cột DB từ JSON vào DataPropertyName
-                gridColumn.DataPropertyName = col.DataField;
-                // Đặt tên hiển thị từ Schema
-                gridColumn.HeaderText = col.HeaderText;
-                gridColumn.Name = col.DataField;
+            // 1. GỌI API/HÀM CHUNG ĐỂ NẠP HEADER TỰ ĐỘNG TỪ BACKEND PYTHON
+            Fn_DataGridViewHelper.LoadDynamicHeaders(dgvUsers, REPORT_CODE);
 
-                //// --- KHẮC PHỤC LỖI HIỂN THỊ ĐỊNH DẠNG NGÀY TRÊN GRID ---
-                if (col.DataField == "ID_DT" || col.DataField == "WORK_DT" || col.DataField == "UPD_DT")
-                {
-                    // Định dạng hiển thị dd/MM/yyyy trên DataGridView
-                    gridColumn.DefaultCellStyle.Format = "dd/MM/yyyy";
-                }
-                // ----------------------------------------------------
-
-                dgvUsers.Columns.Add(gridColumn);
-            }
-
-            // Đảm bảo các thiết lập ReadOnly và AutoSizeColumnsMode vẫn còn
+            // 2. THIẾT LẬP THUỘC TÍNH CƠ BẢN CHO GRID
             dgvUsers.ReadOnly = true;
             dgvUsers.AllowUserToAddRows = false;
             dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // =========================================================================
-            // ĐĂNG KÝ SỰ KIỆN TỪ CLASS COMMON DÙNG CHUNG
-            // =========================================================================
-            dgvUsers.RowPostPaint += Fn_DataGridViewHelper.DrawRowNumbers; // Gọi hàm vẽ số thứ tự
-            dgvUsers.CellPainting += Fn_DataGridViewHelper.DrawHeaderSTT;  // Gọi hàm vẽ chữ STT trên header
+            // 3. ĐĂNG KÝ SỰ KIỆN TỪ CLASS COMMON DÙNG CHUNG (Vẽ STT)
+            dgvUsers.RowPostPaint += Fn_DataGridViewHelper.DrawRowNumbers;
+            dgvUsers.CellPainting += Fn_DataGridViewHelper.DrawHeaderSTT;
         }
+
         // Hàm để tạo request API đến service
         private async Task CallPythonServiceIUD(FormMode mode, string userName, string email, string id_no, string id_dt, string id_org, string userid, string pwd, string mobi_phone)
         {
@@ -227,10 +182,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 1. Tạo đối tượng dữ liệu chung (bao gồm cả PROC_TP)
             var userData = new
             {
-                // PROC_TP được đặt lên đầu để Python phân luồng
                 PROC_TP = procTp,
-
-                // Gửi tên cột CHỮ HOA để khớp với Python và Oracle DB
                 USERNAME = userName,
                 EMAIL = email,
                 ID_NO = id_no,
@@ -248,10 +200,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             {
                 try
                 {
-                    // Endpoint API IUD chung
                     string url = SMAPP_ConfigApiFlask.ApiConfig.UserIudUrl;
-
-                    // Luôn dùng POST (vì là IUD)
                     HttpResponseMessage response = await client.PostAsync(url, content);
                     string responseContent = await response.Content.ReadAsStringAsync();
 
@@ -270,7 +219,6 @@ namespace WindowsFormsApp_Pharmacy_Management
                     else
                     {
                         string errorTitle = $"Lỗi HTTP: {response.StatusCode} (PROC_TP: {procTp})";
-                        // Xử lý lỗi (giống như logic đã có)
                         try
                         {
                             dynamic errorResponse = JsonConvert.DeserializeObject(responseContent);
@@ -289,18 +237,16 @@ namespace WindowsFormsApp_Pharmacy_Management
                 }
             }
         }
+
         private async void btnSearch_Click(object sender, EventArgs e)
         {
-            //Disnable các trường detail info
             DisableDetailInfo();
             string apiUrl = SMAPP_ConfigApiFlask.ApiConfig.UserInfoUrl;
 
-            // Lấy giá trị tìm kiếm
             string userId = Uri.EscapeDataString(txtSearchUserId.Text.Trim());
             string phone = Uri.EscapeDataString(txtSearchPhone.Text.Trim());
             string email = Uri.EscapeDataString(txtSearchEmail.Text.Trim());
 
-            // Tạo chuỗi truy vấn (query string)
             string query = $"?user_id={userId}&phone={phone}&email={email}";
             string fullUrl = apiUrl + query;
 
@@ -313,11 +259,10 @@ namespace WindowsFormsApp_Pharmacy_Management
 
                     if (response.IsSuccessStatusCode)
                     {
-                        // API Python trả về danh sách người dùng JSON: {"users": [...]}
                         JObject jsonResponse = JObject.Parse(responseBody);
                         JArray usersArray = (JArray)jsonResponse["users"];
 
-                        dgvUsers.DataSource = usersArray.ToObject<DataTable>(); // Hoặc List<UserObject>
+                        dgvUsers.DataSource = usersArray.ToObject<DataTable>();
                         MessageBox.Show("Tìm kiếm thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -331,7 +276,7 @@ namespace WindowsFormsApp_Pharmacy_Management
                 }
             }
         }
-        // Thêm mới (btnAddNew)
+
         private async void button1_Click(object sender, EventArgs e)
         {
             EnableDetailInfo();
@@ -340,11 +285,9 @@ namespace WindowsFormsApp_Pharmacy_Management
             currentMode = FormMode.Insert;
         }
 
-
         private async void btnDelete_Click(object sender, EventArgs e)
         {
             string userid = txtUserIdDetail.Text.Trim();
-
             if (string.IsNullOrEmpty(userid))
             {
                 MessageBox.Show("Vui lòng chọn một người dùng trên lưới để xóa.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -359,9 +302,7 @@ namespace WindowsFormsApp_Pharmacy_Management
 
             if (result == DialogResult.Yes)
             {
-                // GỌI HÀM IUD CHUNG VỚI FormMode.Delete
                 MessageBox.Show("Bắt đầu xử lý xóa tài khoản");
-                // Các tham số khác là NULL hoặc rỗng khi xóa
                 await CallPythonServiceIUD(FormMode.Delete, null, null, null, null, null, userid, null, null);
             }
         }
@@ -381,16 +322,14 @@ namespace WindowsFormsApp_Pharmacy_Management
             string id_no = txtIdNoDetail.Text.Trim();
             string id_org = txtIdOrgDetail.Text.Trim();
 
-            // Xử lý Ngày cấp - Lấy giá trị theo loại Control
+            // Xử lý Ngày cấp 
             string id_dt_raw;
             if (dtp_IdDtDetail is DateTimePicker dtp)
             {
-                // Nếu là DateTimePicker, lấy giá trị đã được chọn (dạng dd/MM/yyyy nếu format đúng)
                 id_dt_raw = dtp.Value.ToString("dd/MM/yyyy");
             }
             else
             {
-                // Nếu là TextBox/MaskedTextBox
                 id_dt_raw = dtp_IdDtDetail.Text.Trim();
             }
 
@@ -401,10 +340,6 @@ namespace WindowsFormsApp_Pharmacy_Management
             DateTime dateValue;
             bool success = false;
 
-            // Định dạng ưu tiên (dành cho người dùng nhập/chọn)
-            string[] acceptedFormats = new[] { "dd/MM/yyyy" };
-
-            // 1. Thử phân tích chuỗi ngày cấp thô (chỉ cần định dạng dd/MM/yyyy là đủ)
             success = DateTime.TryParseExact(
                 id_dt_raw,
                 "dd/MM/yyyy",
@@ -412,46 +347,38 @@ namespace WindowsFormsApp_Pharmacy_Management
                 DateTimeStyles.None,
                 out dateValue);
 
-            // Nếu là DateTimePicker, TryParseExact không cần thiết vì Value luôn là DateTime hợp lệ
             if (!success && dtp_IdDtDetail is DateTimePicker dtp1)
             {
                 dateValue = dtp1.Value;
                 success = true;
             }
 
-
             if (success)
             {
-                // Nếu phân tích thành công, chuyển sang định dạng YYYYMMDD (Oracle)
                 id_dt_formatted = dateValue.ToString("yyyyMMdd");
             }
             else if (string.IsNullOrEmpty(id_dt_raw))
             {
-                // Cho phép ngày cấp để trống (NULL cho DB)
                 id_dt_formatted = string.Empty;
             }
             else
             {
-                // Xử lý lỗi nếu không khớp định dạng
                 MessageBox.Show($"Lỗi: Ngày cấp phải theo định dạng 'dd/MM/yyyy'.", "Lỗi định dạng ngày", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             // --- KẾT THÚC XỬ LÝ CHUYỂN ĐỔI NGÀY THÁNG ---
 
-            // Xử lý chính
             if (currentMode == FormMode.Insert || currentMode == FormMode.Update)
             {
                 string action = (currentMode == FormMode.Insert) ? "thêm mới" : "chỉnh sửa";
                 MessageBox.Show($"Bắt đầu xử lý {action} tài khoản");
 
-                // GỌI HÀM IUD CHUNG
                 await CallPythonServiceIUD(currentMode, userName, email, id_no, id_dt_formatted, id_org, userid, pwd, mobi_phone);
             }
             else
             {
                 MessageBox.Show("Vui lòng nhấn 'Thêm mới' hoặc 'Sửa' trước khi Lưu.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
         }
 
         private void dgvUsers_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -480,7 +407,6 @@ namespace WindowsFormsApp_Pharmacy_Management
                 // Xử lý Ngày cấp (ID_DT)
                 string idDtRaw = GetCellValue(selectedRow, "ID_DT");
 
-                // Nếu là DateTimePicker, gán giá trị hợp lệ
                 if (dtp_IdDtDetail is DateTimePicker dtp)
                 {
                     if (!string.IsNullOrEmpty(idDtRaw) && DateTime.TryParseExact(
@@ -492,13 +418,7 @@ namespace WindowsFormsApp_Pharmacy_Management
                     {
                         dtp.Value = dt;
                     }
-                    else
-                    {
-                        // Nếu DB là NULL hoặc không hợp lệ, set lại ngày mặc định/reset
-                        // Có thể đặt dtp.Value = DateTime.Now; hoặc reset trạng thái hiển thị
-                    }
                 }
-                // Nếu là TextBox/MaskedTextBox, vẫn dùng logic hiển thị định dạng
                 else
                 {
                     if (!string.IsNullOrEmpty(idDtRaw) && DateTime.TryParseExact(
@@ -508,12 +428,11 @@ namespace WindowsFormsApp_Pharmacy_Management
                         DateTimeStyles.None,
                         out DateTime dt))
                     {
-                        // Chuyển từ YYYYMMDD sang định dạng dd/MM/yyyy để dễ đọc
                         dtp_IdDtDetail.Text = dt.ToString("dd/MM/yyyy");
                     }
                     else
                     {
-                        dtp_IdDtDetail.Text = idDtRaw; // Gán chuỗi thô nếu không phải định dạng ngày
+                        dtp_IdDtDetail.Text = idDtRaw;
                     }
                 }
 
@@ -528,12 +447,10 @@ namespace WindowsFormsApp_Pharmacy_Management
 
         private void txtIdDtDetail_ValueChanged(object sender, EventArgs e)
         {
-            // Chỉ cần thiết nếu txtIdDtDetail là DateTimePicker
         }
 
         private void gbDetails_Enter(object sender, EventArgs e)
         {
-
         }
     }
 }
