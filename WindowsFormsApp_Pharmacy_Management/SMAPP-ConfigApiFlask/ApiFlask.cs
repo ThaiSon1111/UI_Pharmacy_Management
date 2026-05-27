@@ -33,6 +33,6 @@ namespace WindowsFormsApp_Pharmacy_Management.SMAPP_ConfigApiFlask
         public static string SalesCreateUrl => $"{BaseUrl}/api/sales/create";
 
         // --- Module Common ---
-        public static string getheaderreport => $"{BaseUrl}/api/common/getheaderreport";
+        public static string getheaderreport => $"{BaseUrl}/api/common/column-config";
     }
 }

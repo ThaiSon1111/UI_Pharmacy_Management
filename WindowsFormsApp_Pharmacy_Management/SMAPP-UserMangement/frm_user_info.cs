@@ -44,10 +44,22 @@ namespace WindowsFormsApp_Pharmacy_Management
         public frm_user_info()
         {
             InitializeComponent();
-            SetupGridColumns(); // Bắt buộc gọi trước khi gán DataSource
             DisableDetailInfo();
         }
+        // Sửa Form_Load thành async, gọi Helper:
+        private async void UserInfoForm_Load(object sender, EventArgs e)
+        {
+            // Bước 1: Load header động trước khi làm gì khác
+            await Fn_DataGridViewHelper.LoadDynamicHeadersAsync(dgvUsers, REPORT_CODE);
 
+            // Bước 2: Tự động tìm kiếm nếu đã đăng nhập
+            string loggedInUser = SessionManager.LoggedInUsername;
+            if (!string.IsNullOrEmpty(loggedInUser))
+            {
+                txtSearchUserId.Text = loggedInUser;
+                btnSearch_Click(sender, e);
+            }
+        }
         // Disable các trường detail
         private void DisableDetailInfo()
         {
