@@ -234,7 +234,6 @@ D:\UI_Pharmacy_Management\WindowsFormsApp_Pharmacy_Management\obj\Debug\WindowsF
 D:\UI_Pharmacy_Management\WindowsFormsApp_Pharmacy_Management\obj\Debug\WindowsFormsApp_Pharmacy_Management.frm_login.resources
 D:\UI_Pharmacy_Management\WindowsFormsApp_Pharmacy_Management\obj\Debug\WindowsFormsApp_Pharmacy_Management.frm_user_info.resources
 D:\UI_Pharmacy_Management\WindowsFormsApp_Pharmacy_Management\obj\Debug\WindowsFormsApp_Pharmacy_Management.frm_customer_info.resources
-D:\UI_Pharmacy_Management\WindowsFormsApp_Pharmacy_Management\obj\Debug\WindowsFormsApp_Pharmacy_Management.csproj.AssemblyReference.cache
 D:\UI_Pharmacy_Management\WindowsFormsApp_Pharmacy_Management\bin\Debug\DevExpress.Charts.v25.2.Core.dll
 D:\UI_Pharmacy_Management\WindowsFormsApp_Pharmacy_Management\bin\Debug\DevExpress.CodeParser.v25.2.dll
 D:\UI_Pharmacy_Management\WindowsFormsApp_Pharmacy_Management\bin\Debug\DevExpress.Data.Desktop.v25.2.dll

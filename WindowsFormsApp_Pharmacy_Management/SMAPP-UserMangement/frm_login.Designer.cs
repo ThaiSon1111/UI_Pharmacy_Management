@@ -40,6 +40,8 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.lb_dangky = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -117,11 +119,11 @@ namespace WindowsFormsApp_Pharmacy_Management
             // lb_chg_pass
             // 
             this.lb_chg_pass.AutoSize = true;
-            this.lb_chg_pass.Font = new System.Drawing.Font("Segoe UI", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_chg_pass.Font = new System.Drawing.Font("Segoe UI", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_chg_pass.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.lb_chg_pass.Location = new System.Drawing.Point(273, 608);
+            this.lb_chg_pass.Location = new System.Drawing.Point(292, 608);
             this.lb_chg_pass.Name = "lb_chg_pass";
-            this.lb_chg_pass.Size = new System.Drawing.Size(178, 32);
+            this.lb_chg_pass.Size = new System.Drawing.Size(148, 28);
             this.lb_chg_pass.TabIndex = 5;
             this.lb_chg_pass.Text = "Quên mật khẩu";
             this.lb_chg_pass.Click += new System.EventHandler(this.lb_chg_pass_Click);
@@ -157,6 +159,26 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.pictureBox3.TabIndex = 8;
             this.pictureBox3.TabStop = false;
             // 
+            // lb_dangky
+            // 
+            this.lb_dangky.AutoSize = true;
+            this.lb_dangky.Font = new System.Drawing.Font("Segoe UI", 8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_dangky.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.lb_dangky.Location = new System.Drawing.Point(352, 782);
+            this.lb_dangky.Name = "lb_dangky";
+            this.lb_dangky.Size = new System.Drawing.Size(99, 21);
+            this.lb_dangky.TabIndex = 10;
+            this.lb_dangky.Text = "Đăng ký mới";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 783);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(294, 20);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Chưa có tài khoản? Liên hệ Quản trị viên";
+            // 
             // frm_login
             // 
             this.AcceptButton = this.btn_login;
@@ -165,6 +187,8 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnExit;
             this.ClientSize = new System.Drawing.Size(492, 813);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lb_dangky);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -203,5 +227,7 @@ namespace WindowsFormsApp_Pharmacy_Management
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label lb_dangky;
+        private System.Windows.Forms.Label label1;
     }
 }
