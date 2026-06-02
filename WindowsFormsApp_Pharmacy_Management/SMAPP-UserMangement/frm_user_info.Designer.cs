@@ -60,9 +60,14 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtUserIdDetail = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvUsers = new System.Windows.Forms.DataGridView();
+            this.picUserImage = new System.Windows.Forms.PictureBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
+            this.btnImportImage = new System.Windows.Forms.Button();
             this.gbSearch.SuspendLayout();
             this.gbDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picUserImage)).BeginInit();
             this.SuspendLayout();
             // 
             // gbSearch
@@ -79,7 +84,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.gbSearch.Controls.Add(this.txtSearchUserId);
             this.gbSearch.Location = new System.Drawing.Point(34, 19);
             this.gbSearch.Name = "gbSearch";
-            this.gbSearch.Size = new System.Drawing.Size(1782, 72);
+            this.gbSearch.Size = new System.Drawing.Size(1758, 72);
             this.gbSearch.TabIndex = 0;
             this.gbSearch.TabStop = false;
             this.gbSearch.Text = "Điều kiện tra cứu";
@@ -154,8 +159,6 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             // gbDetails
             // 
-            this.gbDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbDetails.Controls.Add(this.dtp_IdDtDetail);
             this.gbDetails.Controls.Add(this.btnSave);
             this.gbDetails.Controls.Add(this.btnEdit);
@@ -178,7 +181,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.gbDetails.Controls.Add(this.label4);
             this.gbDetails.Location = new System.Drawing.Point(34, 97);
             this.gbDetails.Name = "gbDetails";
-            this.gbDetails.Size = new System.Drawing.Size(1782, 168);
+            this.gbDetails.Size = new System.Drawing.Size(1283, 168);
             this.gbDetails.TabIndex = 1;
             this.gbDetails.TabStop = false;
             this.gbDetails.Text = "Thông tin chi tiết";
@@ -359,9 +362,8 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             // dgvUsers
             // 
-            this.dgvUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvUsers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsers.Location = new System.Drawing.Point(34, 284);
@@ -369,18 +371,47 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.dgvUsers.ReadOnly = true;
             this.dgvUsers.RowHeadersWidth = 62;
             this.dgvUsers.RowTemplate.Height = 28;
-            this.dgvUsers.Size = new System.Drawing.Size(1782, 491);
+            this.dgvUsers.Size = new System.Drawing.Size(1283, 491);
             this.dgvUsers.TabIndex = 3;
             this.dgvUsers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellClick);
+            // 
+            // picUserImage
+            // 
+            this.picUserImage.Location = new System.Drawing.Point(1344, 114);
+            this.picUserImage.Name = "picUserImage";
+            this.picUserImage.Size = new System.Drawing.Size(448, 608);
+            this.picUserImage.TabIndex = 17;
+            this.picUserImage.TabStop = false;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // openFileDialog2
+            // 
+            this.openFileDialog2.FileName = "openFileDialog2";
+            // 
+            // btnImportImage
+            // 
+            this.btnImportImage.Location = new System.Drawing.Point(1497, 742);
+            this.btnImportImage.Name = "btnImportImage";
+            this.btnImportImage.Size = new System.Drawing.Size(179, 33);
+            this.btnImportImage.TabIndex = 18;
+            this.btnImportImage.Text = "Chọn ảnh";
+            this.btnImportImage.UseVisualStyleBackColor = true;
+            this.btnImportImage.Click += new System.EventHandler(this.btnImportImage_Click_1);
             // 
             // frm_user_info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1828, 908);
+            this.Controls.Add(this.btnImportImage);
             this.Controls.Add(this.dgvUsers);
+            this.Controls.Add(this.picUserImage);
             this.Controls.Add(this.gbDetails);
             this.Controls.Add(this.gbSearch);
+            this.MaximizeBox = false;
             this.Name = "frm_user_info";
             this.Text = "Thông Tin & Tra Cứu Tài Khoản";
             this.Load += new System.EventHandler(this.UserInfoForm_Load);
@@ -389,6 +420,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.gbDetails.ResumeLayout(false);
             this.gbDetails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picUserImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -426,5 +458,9 @@ namespace WindowsFormsApp_Pharmacy_Management
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.DateTimePicker dtp_IdDtDetail;
+        private System.Windows.Forms.PictureBox picUserImage;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog2;
+        private System.Windows.Forms.Button btnImportImage;
     }
 }

@@ -13,9 +13,11 @@ using Newtonsoft.Json.Linq;
 //using DevExpress.XtraGrid.Columns; // Các thư viện DevExpress đã bị loại bỏ
 //using DevExpress.XtraGrid.Views.Grid; // Các thư viện DevExpress đã bị loại bỏ
 using System.Globalization; // Dùng khi có sử dụng CultureInfo
-
+using System.IO;
 using WindowsFormsApp_Pharmacy_Management.SMAPP_ConfigApiFlask;
 using WindowsFormsApp_Pharmacy_Management.SMAPP_FunctionCommon; // Thêm dòng này để include thư mục common
+
+
 namespace WindowsFormsApp_Pharmacy_Management
 {
     // Khai báo Enum để định nghĩa các trạng thái
@@ -29,6 +31,7 @@ namespace WindowsFormsApp_Pharmacy_Management
 
     public partial class frm_user_info : Form
     {
+        private string base64ImageString = ""; // Biến toàn cục lưu chuỗi ảnh
         // 2. Khai báo biến lưu trữ trạng thái hiện tại (Form State)
         private FormMode currentMode = FormMode.None;
         // Mã báo cáo/màn hình được sử dụng để lấy cấu hình
@@ -51,6 +54,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             new ColumnConfig("ID_ORG", "Nơi Cấp CMND"),
             new ColumnConfig("WORK_DT", "Ngày Vào Làm"),
             new ColumnConfig("UPD_DT", "Cập Nhật Cuối"),
+            new ColumnConfig("USER_IMAGE", "Ảnh đại diện"),
             // Bỏ PWD nếu không muốn hiển thị trên lưới
             // new ColumnConfig("PWD", "Mật Khẩu (Hash)"), 
         };
@@ -220,7 +224,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             dgvUsers.CellPainting += Fn_DataGridViewHelper.DrawHeaderSTT;  // Gọi hàm vẽ chữ STT trên header
         }
         // Hàm để tạo request API đến service
-        private async Task CallPythonServiceIUD(FormMode mode, string userName, string email, string id_no, string id_dt, string id_org, string userid, string pwd, string mobi_phone)
+        private async Task CallPythonServiceIUD(FormMode mode, string userName, string email, string id_no, string id_dt, string id_org, string userid, string pwd, string mobi_phone, string user_image)
         {
             string procTp = GetProcTypeFromMode(mode);
 
@@ -238,7 +242,8 @@ namespace WindowsFormsApp_Pharmacy_Management
                 ID_ORG = id_org,
                 USER_ID = userid, // Khóa chính
                 PWD = pwd,
-                MOBI_PHONE = mobi_phone
+                MOBI_PHONE = mobi_phone,
+                USER_IMAGE = user_image
             };
 
             string jsonPayload = JsonConvert.SerializeObject(userData);
@@ -362,7 +367,7 @@ namespace WindowsFormsApp_Pharmacy_Management
                 // GỌI HÀM IUD CHUNG VỚI FormMode.Delete
                 MessageBox.Show("Bắt đầu xử lý xóa tài khoản");
                 // Các tham số khác là NULL hoặc rỗng khi xóa
-                await CallPythonServiceIUD(FormMode.Delete, null, null, null, null, null, userid, null, null);
+                await CallPythonServiceIUD(FormMode.Delete, null, null, null, null, null, userid, null, null, null);
             }
         }
 
@@ -374,12 +379,16 @@ namespace WindowsFormsApp_Pharmacy_Management
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
+       
             string userid = txtUserIdDetail.Text.Trim();
             string userName = txtUsernameDetail.Text.Trim();
             string email = txtEmailDetail.Text.Trim();
             string mobi_phone = txtPhoneDetail.Text.Trim();
             string id_no = txtIdNoDetail.Text.Trim();
             string id_org = txtIdOrgDetail.Text.Trim();
+            string user_image = base64ImageString; // Chuỗi base64 đã xử lý ở trên
+
+            Console.WriteLine($"user_image: {user_image}");
 
             // Xử lý Ngày cấp - Lấy giá trị theo loại Control
             string id_dt_raw;
@@ -445,7 +454,7 @@ namespace WindowsFormsApp_Pharmacy_Management
                 MessageBox.Show($"Bắt đầu xử lý {action} tài khoản");
 
                 // GỌI HÀM IUD CHUNG
-                await CallPythonServiceIUD(currentMode, userName, email, id_no, id_dt_formatted, id_org, userid, pwd, mobi_phone);
+                await CallPythonServiceIUD(currentMode, userName, email, id_no, id_dt_formatted, id_org, userid, pwd, mobi_phone, user_image);
             }
             else
             {
@@ -516,7 +525,51 @@ namespace WindowsFormsApp_Pharmacy_Management
                         dtp_IdDtDetail.Text = idDtRaw; // Gán chuỗi thô nếu không phải định dạng ngày
                     }
                 }
+                // =========================================================================
+                // ĐOẠN SỬA ĐỔI BỔ SUNG: TRÍCH XUẤT CHUỖI BASE64 VÀ ĐƯA ẢNH LÊN LÊN GIAO DIỆN
+                // =========================================================================
+                // Bước 2.1: Ép kiểu đối tượng ràng buộc dữ liệu của dòng thành DataRowView
+                if (selectedRow.DataBoundItem is DataRowView rowView)
+                {
+                    // Bước 2.2: Kiểm tra xem cấu trúc bảng dữ liệu ngầm có cột USER_IMAGE và giá trị không phải NULL hay không
+                    if (rowView.Row.Table.Columns.Contains("USER_IMAGE") && rowView["USER_IMAGE"] != DBNull.Value)
+                    {
+                        // Bước 2.3: Rút chuỗi văn bản Base64 ra và cắt bỏ khoảng trắng thừa
+                        string base64Image = rowView["USER_IMAGE"].ToString().Trim();
 
+                        if (!string.IsNullOrEmpty(base64Image))
+                        {
+                            // Bước 2.4: Giải mã chuỗi văn bản mã hóa Base64 thành mảng byte nhị phân thô ban đầu
+                            byte[] imageBytes = Convert.FromBase64String(base64Image);
+
+                            // Bước 2.5: Mở một luồng dữ liệu ảo trong RAM (MemoryStream) quản lý mảng byte ảnh này
+                            using (MemoryStream ms = new MemoryStream(imageBytes))
+                            {
+                                // Bước 2.6: Khởi tạo vùng nhớ đồ họa độc lập Bitmap để nạp ảnh lên PictureBox
+                                picUserImage.Image = new Bitmap(Image.FromStream(ms));
+                            }
+
+                            // Bước 2.7: Cấu hình căn chỉnh ảnh co dãn theo đúng tỷ lệ chuẩn của khung hình PictureBox
+                            picUserImage.SizeMode = PictureBoxSizeMode.Zoom;
+
+                            // Bước 2.8: Đồng bộ giá trị vào biến toàn cục phục vụ cho tác vụ bấm nút "Lưu/Sửa" kế tiếp
+                            base64ImageString = base64Image;
+                        }
+                        else
+                        {
+                            // Trường hợp chuỗi rỗng (Người dùng không có ảnh) -> Xóa trắng ảnh cũ trên UI
+                            picUserImage.Image = null;
+                            base64ImageString = "";
+                        }
+                    }
+                    else
+                    {
+                        picUserImage.Image = null;
+                        base64ImageString = "";
+                    }
+                }
+                // =========================================================================
+                // =========================================================================
                 // Đặt form về trạng thái xem (khóa chỉnh sửa)
                 DisableDetailInfo();
             }
@@ -534,6 +587,68 @@ namespace WindowsFormsApp_Pharmacy_Management
         private void gbDetails_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnImportImage_Click_1(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Image Files(*.jpg; *.jpeg; *.png)|*.jpg; *.jpeg; *.png";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // 1. Đọc ảnh gốc từ đường dẫn file
+                    using (Image originalImage = Image.FromFile(openFileDialog.FileName))
+                    {
+                        // 2. Kiểm tra và xoay ảnh theo đúng hướng EXIF Metadata
+                        Image correctImage = CorrectImageOrientation(originalImage);
+
+                        // 3. Hiển thị ảnh đã chuẩn hóa lên PictureEdit hoặc PictureBox
+                        picUserImage.Image = new Bitmap(correctImage);
+
+                        // 4. Chuyển đổi ảnh đã xoay chuẩn sang chuỗi Base64 để gửi API
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            // Lưu ảnh dưới định dạng PNG hoặc JPEG tùy nhu cầu
+                            correctImage.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+                            byte[] imageBytes = ms.ToArray();
+                            base64ImageString = Convert.ToBase64String(imageBytes);
+                        }
+                        // Tự động scale hình ảnh theo kích thước của PictureBox và giữ đúng tỷ lệ hình ảnh
+                        picUserImage.SizeMode = PictureBoxSizeMode.Zoom;
+                    }
+                }
+            }
+        }
+        // Hàm bổ trợ: Đọc tag EXIF và xoay ảnh về dạng đứng chuẩn
+        private Image CorrectImageOrientation(Image img)
+        {
+            // Kiểm tra xem ảnh có chứa tag Orientation (0x0112) hay không
+            if (Array.IndexOf(img.PropertyIdList, 0x0112) > -1)
+            {
+                try
+                {
+                    var prop = img.GetPropertyItem(0x0112);
+                    if (prop != null && prop.Value != null && prop.Value.Length > 0)
+                    {
+                        int orientation = prop.Value[0];
+
+                        if (orientation == 6)
+                            img.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                        else if (orientation == 8)
+                            img.RotateFlip(RotateFlipType.Rotate270FlipNone);
+                        else if (orientation == 3)
+                            img.RotateFlip(RotateFlipType.Rotate180FlipNone);
+
+                        img.RemovePropertyItem(0x0112); // Xóa tag cũ sau khi xoay xong
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    // Nếu có lỗi không tìm thấy property, bỏ qua và trả về ảnh gốc
+                }
+            }
+            return img;
         }
     }
 }

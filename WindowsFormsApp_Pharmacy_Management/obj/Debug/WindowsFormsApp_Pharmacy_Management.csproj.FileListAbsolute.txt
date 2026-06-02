@@ -325,3 +325,4 @@ D:\UI_Pharmacy_Management\WindowsFormsApp_Pharmacy_Management\bin\Debug\Microsof
 D:\UI_Pharmacy_Management\WindowsFormsApp_Pharmacy_Management\bin\Debug\Microsoft.Extensions.Primitives.xml
 D:\UI_Pharmacy_Management\WindowsFormsApp_Pharmacy_Management\bin\Debug\DevExpress.XtraReports.v25.2.Extensions.dll
 D:\UI_Pharmacy_Management\WindowsFormsApp_Pharmacy_Management\bin\Debug\DevExpress.XtraReports.v25.2.Extensions.xml
+D:\UI_Pharmacy_Management\WindowsFormsApp_Pharmacy_Management\obj\Debug\WindowsFormsApp_Pharmacy_Management.csproj.AssemblyReference.cache
