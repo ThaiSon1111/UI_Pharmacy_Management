@@ -54,6 +54,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             new ColumnConfig("ID_ORG", "Nơi Cấp CMND"),
             new ColumnConfig("WORK_DT", "Ngày Vào Làm"),
             new ColumnConfig("UPD_DT", "Cập Nhật Cuối"),
+            new ColumnConfig("USER_IMAGE", "Ảnh đại diện"),
             // Bỏ PWD nếu không muốn hiển thị trên lưới
             // new ColumnConfig("PWD", "Mật Khẩu (Hash)"), 
         };
@@ -241,7 +242,8 @@ namespace WindowsFormsApp_Pharmacy_Management
                 ID_ORG = id_org,
                 USER_ID = userid, // Khóa chính
                 PWD = pwd,
-                MOBI_PHONE = mobi_phone
+                MOBI_PHONE = mobi_phone,
+                USER_IMAGE = user_image
             };
 
             string jsonPayload = JsonConvert.SerializeObject(userData);
@@ -385,7 +387,8 @@ namespace WindowsFormsApp_Pharmacy_Management
             string id_no = txtIdNoDetail.Text.Trim();
             string id_org = txtIdOrgDetail.Text.Trim();
             string user_image = base64ImageString; // Chuỗi base64 đã xử lý ở trên
-        
+
+            Console.WriteLine($"user_image: {user_image}");
 
             // Xử lý Ngày cấp - Lấy giá trị theo loại Control
             string id_dt_raw;
@@ -522,7 +525,51 @@ namespace WindowsFormsApp_Pharmacy_Management
                         dtp_IdDtDetail.Text = idDtRaw; // Gán chuỗi thô nếu không phải định dạng ngày
                     }
                 }
+                // =========================================================================
+                // ĐOẠN SỬA ĐỔI BỔ SUNG: TRÍCH XUẤT CHUỖI BASE64 VÀ ĐƯA ẢNH LÊN LÊN GIAO DIỆN
+                // =========================================================================
+                // Bước 2.1: Ép kiểu đối tượng ràng buộc dữ liệu của dòng thành DataRowView
+                if (selectedRow.DataBoundItem is DataRowView rowView)
+                {
+                    // Bước 2.2: Kiểm tra xem cấu trúc bảng dữ liệu ngầm có cột USER_IMAGE và giá trị không phải NULL hay không
+                    if (rowView.Row.Table.Columns.Contains("USER_IMAGE") && rowView["USER_IMAGE"] != DBNull.Value)
+                    {
+                        // Bước 2.3: Rút chuỗi văn bản Base64 ra và cắt bỏ khoảng trắng thừa
+                        string base64Image = rowView["USER_IMAGE"].ToString().Trim();
 
+                        if (!string.IsNullOrEmpty(base64Image))
+                        {
+                            // Bước 2.4: Giải mã chuỗi văn bản mã hóa Base64 thành mảng byte nhị phân thô ban đầu
+                            byte[] imageBytes = Convert.FromBase64String(base64Image);
+
+                            // Bước 2.5: Mở một luồng dữ liệu ảo trong RAM (MemoryStream) quản lý mảng byte ảnh này
+                            using (MemoryStream ms = new MemoryStream(imageBytes))
+                            {
+                                // Bước 2.6: Khởi tạo vùng nhớ đồ họa độc lập Bitmap để nạp ảnh lên PictureBox
+                                picUserImage.Image = new Bitmap(Image.FromStream(ms));
+                            }
+
+                            // Bước 2.7: Cấu hình căn chỉnh ảnh co dãn theo đúng tỷ lệ chuẩn của khung hình PictureBox
+                            picUserImage.SizeMode = PictureBoxSizeMode.Zoom;
+
+                            // Bước 2.8: Đồng bộ giá trị vào biến toàn cục phục vụ cho tác vụ bấm nút "Lưu/Sửa" kế tiếp
+                            base64ImageString = base64Image;
+                        }
+                        else
+                        {
+                            // Trường hợp chuỗi rỗng (Người dùng không có ảnh) -> Xóa trắng ảnh cũ trên UI
+                            picUserImage.Image = null;
+                            base64ImageString = "";
+                        }
+                    }
+                    else
+                    {
+                        picUserImage.Image = null;
+                        base64ImageString = "";
+                    }
+                }
+                // =========================================================================
+                // =========================================================================
                 // Đặt form về trạng thái xem (khóa chỉnh sửa)
                 DisableDetailInfo();
             }

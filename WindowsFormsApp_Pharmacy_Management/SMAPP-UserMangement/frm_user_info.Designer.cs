@@ -159,8 +159,6 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             // gbDetails
             // 
-            this.gbDetails.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbDetails.Controls.Add(this.dtp_IdDtDetail);
             this.gbDetails.Controls.Add(this.btnSave);
             this.gbDetails.Controls.Add(this.btnEdit);
@@ -364,9 +362,8 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             // dgvUsers
             // 
-            this.dgvUsers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvUsers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.dgvUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsers.Location = new System.Drawing.Point(34, 284);
@@ -414,6 +411,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.Controls.Add(this.picUserImage);
             this.Controls.Add(this.gbDetails);
             this.Controls.Add(this.gbSearch);
+            this.MaximizeBox = false;
             this.Name = "frm_user_info";
             this.Text = "Thông Tin & Tra Cứu Tài Khoản";
             this.Load += new System.EventHandler(this.UserInfoForm_Load);
