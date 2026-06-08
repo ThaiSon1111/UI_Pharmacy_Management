@@ -20,7 +20,7 @@ using WindowsFormsApp_Pharmacy_Management.SMAPP_FunctionCommon; // Thêm dòng n
 
 namespace WindowsFormsApp_Pharmacy_Management
 {
-    // Khai báo Enum để định nghĩa các trạng thái
+     // Khai báo Enum để định nghĩa các trạng thái
     public enum FormMode
     {
         None = 0,      // Trạng thái ban đầu hoặc trạng thái xem
@@ -215,7 +215,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             // Đảm bảo các thiết lập ReadOnly và AutoSizeColumnsMode vẫn còn
             dgvUsers.ReadOnly = true;
             dgvUsers.AllowUserToAddRows = false;
-            dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
 
             // =========================================================================
             // ĐĂNG KÝ SỰ KIỆN TỪ CLASS COMMON DÙNG CHUNG
@@ -266,7 +266,9 @@ namespace WindowsFormsApp_Pharmacy_Management
                         string successMessage = jsonResponse?.message ?? "Thao tác IUD thành công.";
 
                         MessageBox.Show(successMessage, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                        // 2. Nếu thành công -> Bắn chuông thông báo góc dưới bên phải lập tức!
+                        SMAPP_FunctionCommon.fn.Alert.Show("Cập nhật thông tin khách hàng thành công!", frm_Notification.NotificationType.Success);
+                        
                         await ReloadDataAsync();
                         currentMode = FormMode.None;
                         DisableDetailInfo();

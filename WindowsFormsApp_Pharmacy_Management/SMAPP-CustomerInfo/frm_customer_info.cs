@@ -52,6 +52,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             new ColumnConfig("REGI_DT", "Ngày đăng ký"),
             new ColumnConfig("ACC_POINTS", "Điểm tích lũy"),
             new ColumnConfig("ACTIVE_YN", "Trạng thái hoạt động"),
+            new ColumnConfig("UPD_DT", "Ngày cập nhật cuối cùng"),
             // Bỏ PWD nếu không muốn hiển thị trên lưới
             // new ColumnConfig("PWD", "Mật Khẩu (Hash)"), 
         };
@@ -186,7 +187,6 @@ namespace WindowsFormsApp_Pharmacy_Management
         //Hàm để tự động tạo cột, đặt tên và đặt thứ tự theo GridSchema:
         private void SetupGridColumns()
         {
-            // Giả sử tên control là dgvUsers hoặc DataGridView1
             dgvUsers.Columns.Clear();
 
             foreach (var col in GridSchema)
@@ -212,9 +212,9 @@ namespace WindowsFormsApp_Pharmacy_Management
             // Đảm bảo các thiết lập ReadOnly và AutoSizeColumnsMode vẫn còn
             dgvUsers.ReadOnly = true;
             dgvUsers.AllowUserToAddRows = false;
-            dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
             // Đặt độ rộng cho cột chứa số thứ tự vừa đủ nhìn
-            dgvUsers.RowHeadersWidth = 50;
+            dgvUsers.RowHeadersWidth = 30;
 
             // =========================================================================
             // ĐĂNG KÝ SỰ KIỆN TỪ CLASS COMMON DÙNG CHUNG

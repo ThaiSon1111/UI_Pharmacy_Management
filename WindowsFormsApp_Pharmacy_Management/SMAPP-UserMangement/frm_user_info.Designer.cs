@@ -60,10 +60,21 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.txtUserIdDetail = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvUsers = new System.Windows.Forms.DataGridView();
-            this.picUserImage = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.btnImportImage = new System.Windows.Forms.Button();
+            this.USER_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.USERNAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MOBI_PHONE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EMAIL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID_NO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID_DT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID_ORG = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WORK_DT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UPD_DT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PWD = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.USER_IMAGE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.picUserImage = new System.Windows.Forms.PictureBox();
             this.gbSearch.SuspendLayout();
             this.gbDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
@@ -84,7 +95,7 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.gbSearch.Controls.Add(this.txtSearchUserId);
             this.gbSearch.Location = new System.Drawing.Point(34, 19);
             this.gbSearch.Name = "gbSearch";
-            this.gbSearch.Size = new System.Drawing.Size(1758, 72);
+            this.gbSearch.Size = new System.Drawing.Size(2382, 72);
             this.gbSearch.TabIndex = 0;
             this.gbSearch.TabStop = false;
             this.gbSearch.Text = "Điều kiện tra cứu";
@@ -364,24 +375,27 @@ namespace WindowsFormsApp_Pharmacy_Management
             // 
             this.dgvUsers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.dgvUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUsers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.USER_ID,
+            this.USERNAME,
+            this.MOBI_PHONE,
+            this.EMAIL,
+            this.ID_NO,
+            this.ID_DT,
+            this.ID_ORG,
+            this.WORK_DT,
+            this.UPD_DT,
+            this.PWD,
+            this.USER_IMAGE});
             this.dgvUsers.Location = new System.Drawing.Point(34, 284);
             this.dgvUsers.Name = "dgvUsers";
             this.dgvUsers.ReadOnly = true;
             this.dgvUsers.RowHeadersWidth = 62;
             this.dgvUsers.RowTemplate.Height = 28;
-            this.dgvUsers.Size = new System.Drawing.Size(1283, 491);
+            this.dgvUsers.Size = new System.Drawing.Size(1283, 831);
             this.dgvUsers.TabIndex = 3;
             this.dgvUsers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellClick);
-            // 
-            // picUserImage
-            // 
-            this.picUserImage.Location = new System.Drawing.Point(1344, 114);
-            this.picUserImage.Name = "picUserImage";
-            this.picUserImage.Size = new System.Drawing.Size(448, 608);
-            this.picUserImage.TabIndex = 17;
-            this.picUserImage.TabStop = false;
             // 
             // openFileDialog1
             // 
@@ -401,11 +415,118 @@ namespace WindowsFormsApp_Pharmacy_Management
             this.btnImportImage.UseVisualStyleBackColor = true;
             this.btnImportImage.Click += new System.EventHandler(this.btnImportImage_Click_1);
             // 
+            // USER_ID
+            // 
+            this.USER_ID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.USER_ID.HeaderText = "Tài khoản";
+            this.USER_ID.MinimumWidth = 8;
+            this.USER_ID.Name = "USER_ID";
+            this.USER_ID.ReadOnly = true;
+            this.USER_ID.Width = 113;
+            // 
+            // USERNAME
+            // 
+            this.USERNAME.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.USERNAME.HeaderText = "Họ tên";
+            this.USERNAME.MinimumWidth = 8;
+            this.USERNAME.Name = "USERNAME";
+            this.USERNAME.ReadOnly = true;
+            this.USERNAME.Width = 112;
+            // 
+            // MOBI_PHONE
+            // 
+            this.MOBI_PHONE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.MOBI_PHONE.HeaderText = "Số Điện Thoại";
+            this.MOBI_PHONE.MinimumWidth = 8;
+            this.MOBI_PHONE.Name = "MOBI_PHONE";
+            this.MOBI_PHONE.ReadOnly = true;
+            this.MOBI_PHONE.Width = 92;
+            // 
+            // EMAIL
+            // 
+            this.EMAIL.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.EMAIL.HeaderText = "Email";
+            this.EMAIL.MinimumWidth = 8;
+            this.EMAIL.Name = "EMAIL";
+            this.EMAIL.ReadOnly = true;
+            this.EMAIL.Width = 113;
+            // 
+            // ID_NO
+            // 
+            this.ID_NO.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ID_NO.HeaderText = "CMND/CCCD";
+            this.ID_NO.MinimumWidth = 8;
+            this.ID_NO.Name = "ID_NO";
+            this.ID_NO.ReadOnly = true;
+            this.ID_NO.Width = 113;
+            // 
+            // ID_DT
+            // 
+            this.ID_DT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ID_DT.HeaderText = "Ngày Cấp CMND";
+            this.ID_DT.MinimumWidth = 8;
+            this.ID_DT.Name = "ID_DT";
+            this.ID_DT.ReadOnly = true;
+            this.ID_DT.Width = 113;
+            // 
+            // ID_ORG
+            // 
+            this.ID_ORG.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ID_ORG.HeaderText = "Nơi Cấp CMND";
+            this.ID_ORG.MinimumWidth = 8;
+            this.ID_ORG.Name = "ID_ORG";
+            this.ID_ORG.ReadOnly = true;
+            this.ID_ORG.Width = 112;
+            // 
+            // WORK_DT
+            // 
+            this.WORK_DT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.WORK_DT.HeaderText = "Ngày Vào Làm";
+            this.WORK_DT.MinimumWidth = 8;
+            this.WORK_DT.Name = "WORK_DT";
+            this.WORK_DT.ReadOnly = true;
+            this.WORK_DT.Width = 113;
+            // 
+            // UPD_DT
+            // 
+            this.UPD_DT.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.UPD_DT.HeaderText = "Cập Nhật Cuối";
+            this.UPD_DT.MinimumWidth = 8;
+            this.UPD_DT.Name = "UPD_DT";
+            this.UPD_DT.ReadOnly = true;
+            this.UPD_DT.Width = 113;
+            // 
+            // PWD
+            // 
+            this.PWD.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.PWD.HeaderText = "Mật Khẩu (Hash)";
+            this.PWD.MinimumWidth = 8;
+            this.PWD.Name = "PWD";
+            this.PWD.ReadOnly = true;
+            this.PWD.Width = 113;
+            // 
+            // USER_IMAGE
+            // 
+            this.USER_IMAGE.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.USER_IMAGE.HeaderText = "Ảnh Đại Diện";
+            this.USER_IMAGE.MinimumWidth = 8;
+            this.USER_IMAGE.Name = "USER_IMAGE";
+            this.USER_IMAGE.ReadOnly = true;
+            this.USER_IMAGE.Width = 112;
+            // 
+            // picUserImage
+            // 
+            this.picUserImage.Location = new System.Drawing.Point(1344, 108);
+            this.picUserImage.Name = "picUserImage";
+            this.picUserImage.Size = new System.Drawing.Size(448, 614);
+            this.picUserImage.TabIndex = 17;
+            this.picUserImage.TabStop = false;
+            // 
             // frm_user_info
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1828, 908);
+            this.ClientSize = new System.Drawing.Size(1849, 964);
             this.Controls.Add(this.btnImportImage);
             this.Controls.Add(this.dgvUsers);
             this.Controls.Add(this.picUserImage);
@@ -462,5 +583,16 @@ namespace WindowsFormsApp_Pharmacy_Management
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
         private System.Windows.Forms.Button btnImportImage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn USER_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn USERNAME;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MOBI_PHONE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EMAIL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_NO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_DT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_ORG;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WORK_DT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UPD_DT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PWD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn USER_IMAGE;
     }
 }
