@@ -59,14 +59,14 @@ namespace WindowsFormsApp_Pharmacy_Management.SMAPP_FunctionCommon
             // 
             // timer_Close
             // 
-            this.timer_Close.Interval = 10;
+            this.timer_Close.Interval = 3000;
             // 
             // frm_Notification
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FloralWhite;
-            this.ClientSize = new System.Drawing.Size(424, 73);
+            this.ClientSize = new System.Drawing.Size(424, 80);
             this.Controls.Add(this.lbl_Message);
             this.Controls.Add(this.pic_Icon);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

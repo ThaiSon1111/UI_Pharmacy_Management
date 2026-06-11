@@ -61,7 +61,7 @@ namespace WindowsFormsApp_Pharmacy_Management
         public frm_user_info()
         {
             InitializeComponent();
-            SetupGridColumns(); // Bắt buộc gọi trước khi gán DataSource
+            //SetupGridColumns(); // Bắt buộc gọi trước khi gán DataSource
             DisableDetailInfo();
         }
         // Disable các trường detail
@@ -267,7 +267,7 @@ namespace WindowsFormsApp_Pharmacy_Management
 
                         MessageBox.Show(successMessage, "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         // 2. Nếu thành công -> Bắn chuông thông báo góc dưới bên phải lập tức!
-                        SMAPP_FunctionCommon.fn.Alert.Show("Cập nhật thông tin khách hàng thành công!", frm_Notification.NotificationType.Success);
+                        SMAPP_FunctionCommon.fn.Alert.Show("Cập nhật thông tin tài khoản thành công!", frm_Notification.NotificationType.Success);
                         
                         await ReloadDataAsync();
                         currentMode = FormMode.None;
@@ -320,6 +320,22 @@ namespace WindowsFormsApp_Pharmacy_Management
 
                     if (response.IsSuccessStatusCode)
                     {
+                        //Load Header
+                        string jsonResult = await response.Content.ReadAsStringAsync();
+                        JObject resultObj = JObject.Parse(jsonResult);
+
+                        if (resultObj["status"]?.ToString() == "SUCCESS")
+                        {
+                            // A. Lấy mảng cấu hình header và gọi Helper để xây dựng Grid động
+                            JArray headersArray = (JArray)resultObj["headers"];
+                            Fn_DataGridViewHelper.SetupDynamicColumns(dgvUsers, headersArray);
+
+                            // B. Lấy mảng dữ liệu thô và map vào Grid
+                            JArray dataArray = (JArray)resultObj["data"];
+
+                            // Chuyển JArray thành DataTable hoặc gán trực tiếp để binding dữ liệu
+                            dgvUsers.DataSource = dataArray.ToObject<System.Data.DataTable>();
+                        }
                         // API Python trả về danh sách người dùng JSON: {"users": [...]}
                         JObject jsonResponse = JObject.Parse(responseBody);
                         JArray usersArray = (JArray)jsonResponse["users"];

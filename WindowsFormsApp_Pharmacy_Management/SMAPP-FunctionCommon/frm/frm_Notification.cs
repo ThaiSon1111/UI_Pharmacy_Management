@@ -64,7 +64,7 @@ namespace WindowsFormsApp_Pharmacy_Management.SMAPP_FunctionCommon
 
         private void pic_Icon_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }
