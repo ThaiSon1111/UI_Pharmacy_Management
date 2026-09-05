@@ -63,42 +63,37 @@ namespace WindowsFormsApp_Pharmacy_Management.SMAPP_FunctionCommon
         }
 
         /// <summary>
-        /// Hàm khởi tạo cấu trúc cột ĐỘNG cho DataGridView dựa trên cấu hình từ DB truyền về
+        /// Hàm dựng Header giao diện tự động từ mảng Schema nhận được dưới Database
         /// </summary>
-        /// <param name="dgv">Tên DataGridView cần xử lý</param>
-        /// <param name="headersJson">Mảng JSON headers nhận được từ API</param>
-        public static void SetupDynamicColumns(DataGridView dgv, JArray headersJson)
+        /// <param name="dgv">DataGridView cần dựng tiêu đề</param>
+        /// <param name="headersArray">Mảng JArray chứa schema headers nhận từ API</param>
+        public static void SetupDynamicColumns(DataGridView dgv, JArray headersArray)
         {
-            if (dgv == null || headersJson == null) return;
+            if (dgv == null || headersArray == null) return;
 
-            // 1. Xóa toàn bộ cấu hình cột cũ đang hiển thị trên UI (nếu có)
+            // 1. Tắt chế độ tự sinh cột bừa bãi và xóa toàn bộ cột cũ
+            dgv.AutoGenerateColumns = false;
             dgv.Columns.Clear();
-            dgv.AutoGenerateColumns = false; // Tắt tự sinh cột tự do để kiểm soát thứ tự tuyệt đối
 
-            // 2. Duyệt qua danh sách cấu hình header đã được sắp xếp sẵn từ DB (theo seq)
-            foreach (var item in headersJson)
+            // 2. Kích hoạt thuộc tính thanh cuộn ngang/dọc tránh bị mất cột khi kéo rộng
+            dgv.ScrollBars = ScrollBars.Both;
+
+            // 3. Duyệt mảng cấu hình từ Database gửi sang để thiết lập cột mới tuần tự
+            foreach (var header in headersArray)
             {
-                string columnName = item["column_name"]?.ToString();
-                string headerText = item["header_text"]?.ToString();
-                bool isVisible = (item["is_visible"]?.ToObject<int>() ?? 1) == 1;
-                int columnWidth = item["column_width"]?.ToObject<int>() ?? 120;
+                string colName = header["col_name"]?.ToString();
+                string headerText = header["header_text"]?.ToString();
 
-                if (string.IsNullOrEmpty(columnName)) continue;
+                if (!string.IsNullOrEmpty(colName))
+                {
+                    DataGridViewTextBoxColumn newColumn = new DataGridViewTextBoxColumn();
+                    newColumn.Name = colName;
+                    newColumn.DataPropertyName = colName; // Khớp trường dữ liệu Mapping với JSON data
+                    newColumn.HeaderText = headerText ?? colName; // Đổi chữ Tiếng Việt hiển thị lên UI
+                    newColumn.AutoSizeMode = DataGridViewColumnAutoSizeMode.DisplayedCells; // Tự giãn theo nội dung dữ liệu
 
-                // 3. Khởi tạo cột mới bằng code
-                DataGridViewTextBoxColumn col = new DataGridViewTextBoxColumn();
-                col.Name = columnName;                        // Định danh của cột
-                col.DataPropertyName = columnName;            // Khớp chính xác với KEY trong mảng dữ liệu JSON "data"
-                col.HeaderText = headerText;                  // Tiêu đề hiển thị tiếng Việt
-                col.Visible = isVisible;                      // Ẩn/Hiện cột
-                col.Width = columnWidth;                      // Độ rộng cột
-
-                // Cấu hình định dạng bổ sung (tùy chọn)
-                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                col.HeaderCell.Style.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-
-                // 4. Add cột vào Grid theo đúng thứ tự vòng lặp (đã xếp bằng seq từ DB)
-                dgv.Columns.Add(col);
+                    dgv.Columns.Add(newColumn);
+                }
             }
         }
     }

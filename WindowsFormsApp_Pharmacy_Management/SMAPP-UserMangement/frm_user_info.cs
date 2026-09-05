@@ -34,8 +34,10 @@ namespace WindowsFormsApp_Pharmacy_Management
         private string base64ImageString = ""; // Biến toàn cục lưu chuỗi ảnh
         // 2. Khai báo biến lưu trữ trạng thái hiện tại (Form State)
         private FormMode currentMode = FormMode.None;
+
+        private readonly HttpClient _httpClient = new HttpClient();
         // Mã báo cáo/màn hình được sử dụng để lấy cấu hình
-        private const string REPORT_CODE = "0100";
+        private const string REPORT_CODE = "0900";
         // Cần thêm hàm ánh xạ (Helper)
         private string GetProcTypeFromMode(FormMode mode)
         {
@@ -63,6 +65,8 @@ namespace WindowsFormsApp_Pharmacy_Management
             InitializeComponent();
             //SetupGridColumns(); // Bắt buộc gọi trước khi gán DataSource
             DisableDetailInfo();
+            // Đăng ký sự kiện vẽ số thứ tự tự động cho Grid
+            dgvUsers.RowPostPaint += Fn_DataGridViewHelper.DrawRowNumbers;
         }
         // Disable các trường detail
         private void DisableDetailInfo()
@@ -177,6 +181,8 @@ namespace WindowsFormsApp_Pharmacy_Management
 
         private void UserInfoForm_Load(object sender, EventArgs e)
         {
+            // Mặc định gọi hàm tải dữ liệu và cấu hình giao diện động khi mở form
+            LoadDynamicUserData();
             // Nếu có tên đăng nhập trong Session, tự động điền vào ô tìm kiếm và thực hiện tìm kiếm
             string loggedInUser = SessionManager.LoggedInUsername;
             if (!string.IsNullOrEmpty(loggedInUser))
@@ -185,6 +191,7 @@ namespace WindowsFormsApp_Pharmacy_Management
                 // Tự động gọi hàm tìm kiếm khi Form tải
                 btnSearch_Click(sender, e);
             }
+
         }
         //Hàm để tự động tạo cột, đặt tên và đặt thứ tự theo GridSchema:
         private void SetupGridColumns()
@@ -667,6 +674,58 @@ namespace WindowsFormsApp_Pharmacy_Management
                 }
             }
             return img;
+        }
+
+        //11/06/2026: 
+        /// <summary>
+        /// Hàm gọi API Python lấy cấu hình Header + Dữ liệu người dùng nạp lên Grid
+        /// </summary>
+        private async void LoadDynamicUserData()
+        {
+            try
+            {
+                // Khởi tạo URL kết nối, truyền tham số form_id = 0900 cho màn hình User Info
+
+                string apiUrl = SMAPP_ConfigApiFlask.ApiConfig.UserInfoUrl;
+                string fullUrl = apiUrl + query;
+                string requestUrl = $"{fullUrl}?form_id=0900";
+
+                // Thực hiện gọi API Async lên Backend Flask
+                HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonResult = await response.Content.ReadAsStringAsync();
+                    JObject resultObject = JObject.Parse(jsonResult);
+
+                    if (resultObject["status"]?.ToString() == "success")
+                    {
+                        // Lấy mảng Schema Header từ DB thông qua API trả về
+                        JArray headersArray = (JArray)resultObject["headers"];
+                        // Lấy mảng dữ liệu tài khoản thô
+                        JArray dataArray = (JArray)resultObject["data"];
+
+                        // BƯỚC TRỌNG TÂM: Gọi hàm Helper dựng cột UI động trước khi đổ dữ liệu
+                        Fn_DataGridViewHelper.SetupDynamicColumns(dgvUsers, headersArray);
+
+                        // Đổ dữ liệu thô vào Grid thông qua DataTable
+                        DataTable dtUsers = JsonConvert.DeserializeObject<DataTable>(dataArray.ToString());
+                        dgvUsers.DataSource = dtUsers;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Lỗi từ hệ thống: " + resultObject["message"]?.ToString(), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Không thể kết nối đến máy chủ API Backend!", "Lỗi Kết Nối", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi phát sinh trong quá trình đồng bộ UI: " + ex.Message, "Lỗi Hệ Thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
